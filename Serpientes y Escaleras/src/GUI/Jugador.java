@@ -9,20 +9,27 @@ package GUI;
  * @author keiver
  */
 import java.awt.Color;
+import java.util.Random;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 public class Jugador {
 
     private String nombre;
-
+    private ImageIcon fichaIcon;
+    private Color color;
+    private int id;
+    private int position;
 
     public Jugador() {
-        
     }
 
-    public Jugador(String nombre) {
+    public Jugador(int id, String nombre, ImageIcon fichaIcon) {
         this.nombre = nombre;
+        this.fichaIcon = fichaIcon;
+        this.position = 1;
+        this.id = id;
     }
 
     public String getNombre() {
@@ -33,15 +40,41 @@ public class Jugador {
         this.nombre = nombre;
     }
 
+    public ImageIcon getFichaIcon() {
+        return fichaIcon;
+    }
 
-    public void configurarJugador(Jugador jugador, String nombre, String colorSeleccionado, JLabel labelNombre) {
+    public void setFichaIcon(ImageIcon fichaIcon) {
+        this.fichaIcon = fichaIcon;
+    }
 
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    private Color getRandomColor() {
+        Random random = new Random();
+        float r = random.nextFloat();
+        float g = random.nextFloat();
+        float b = random.nextFloat();
+        return new Color(r, g, b);
+    }
+
+    public void configurarJugador(Jugador jugador, String nombre, ImageIcon fichaIcon, JLabel labelNombre) {
         if (nombre.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Tienes que poner un nombre de jugador.", "Alerta", JOptionPane.WARNING_MESSAGE);
         } else {
             jugador.setNombre(nombre);
+            jugador.setFichaIcon(fichaIcon);
             labelNombre.setText(jugador.getNombre());
         }
     }
-
 }

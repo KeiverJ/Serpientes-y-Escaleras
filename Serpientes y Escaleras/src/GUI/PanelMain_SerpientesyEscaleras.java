@@ -5,6 +5,8 @@
 package GUI;
 
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
@@ -48,15 +50,14 @@ public class PanelMain_SerpientesyEscaleras extends javax.swing.JFrame {
     private void initComponents() {
 
         rbtTamañoTablero = new javax.swing.ButtonGroup();
-        jLabel2 = new javax.swing.JLabel();
         panelFondo = new modelo.PanelRedondeado();
         lblCierre = new javax.swing.JLabel();
         lblTamaño = new javax.swing.JLabel();
         txtJugador2 = new javax.swing.JTextField();
         txtJugador1 = new javax.swing.JTextField();
-        rbt5x5 = new javax.swing.JRadioButton();
-        rbt3x3 = new javax.swing.JRadioButton();
-        rbt4x4 = new javax.swing.JRadioButton();
+        rbt15x15 = new javax.swing.JRadioButton();
+        rbt10x10 = new javax.swing.JRadioButton();
+        rbt13x13 = new javax.swing.JRadioButton();
         lblTitulo = new javax.swing.JLabel();
         txtJugador3 = new javax.swing.JTextField();
         txtJugador4 = new javax.swing.JTextField();
@@ -167,23 +168,23 @@ public class PanelMain_SerpientesyEscaleras extends javax.swing.JFrame {
         panelFondo.add(txtJugador1);
         txtJugador1.setBounds(80, 100, 230, 40);
 
-        rbtTamañoTablero.add(rbt5x5);
-        rbt5x5.setForeground(new java.awt.Color(0, 0, 0));
-        rbt5x5.setText("15x15");
-        panelFondo.add(rbt5x5);
-        rbt5x5.setBounds(490, 230, 70, 21);
+        rbtTamañoTablero.add(rbt15x15);
+        rbt15x15.setForeground(new java.awt.Color(0, 0, 0));
+        rbt15x15.setText("15x15");
+        panelFondo.add(rbt15x15);
+        rbt15x15.setBounds(490, 230, 70, 21);
 
-        rbtTamañoTablero.add(rbt3x3);
-        rbt3x3.setForeground(new java.awt.Color(0, 0, 0));
-        rbt3x3.setText("10x10");
-        panelFondo.add(rbt3x3);
-        rbt3x3.setBounds(490, 150, 60, 21);
+        rbtTamañoTablero.add(rbt10x10);
+        rbt10x10.setForeground(new java.awt.Color(0, 0, 0));
+        rbt10x10.setText("10x10");
+        panelFondo.add(rbt10x10);
+        rbt10x10.setBounds(490, 150, 60, 21);
 
-        rbtTamañoTablero.add(rbt4x4);
-        rbt4x4.setForeground(new java.awt.Color(0, 0, 0));
-        rbt4x4.setText("13x13");
-        panelFondo.add(rbt4x4);
-        rbt4x4.setBounds(490, 190, 70, 21);
+        rbtTamañoTablero.add(rbt13x13);
+        rbt13x13.setForeground(new java.awt.Color(0, 0, 0));
+        rbt13x13.setText("13x13");
+        panelFondo.add(rbt13x13);
+        rbt13x13.setBounds(490, 190, 70, 21);
 
         lblTitulo.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
         lblTitulo.setForeground(new java.awt.Color(0, 0, 0));
@@ -353,50 +354,59 @@ public class PanelMain_SerpientesyEscaleras extends javax.swing.JFrame {
     }//GEN-LAST:event_panelFondoMousePressed
 
     private void lblInicarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblInicarMousePressed
-        this.dispose();
-
         Jugador jugador1 = new Jugador();
         Jugador jugador2 = new Jugador();
         Jugador jugador3 = new Jugador();
         Jugador jugador4 = new Jugador();
-        
+
         if (txtJugador1.getText().equals("")) {
             jugador1.setNombre("Jugador 1");
         } else {
             jugador1.setNombre(txtJugador1.getText());
         }
 
-        
         if (txtJugador2.getText().equals("")) {
             jugador2.setNombre("Jugador 2");
         } else {
             jugador2.setNombre(txtJugador2.getText());
         }
-        
+
         if (txtJugador3.getText().equals("")) {
             jugador3.setNombre("Jugador 3");
         } else {
             jugador3.setNombre(txtJugador3.getText());
         }
-        
+
         if (txtJugador4.getText().equals("")) {
             jugador4.setNombre("Jugador 4");
         } else {
             jugador4.setNombre(txtJugador4.getText());
         }
 
-        
         int tamañoTablero = 0;
-        if (rbt3x3.isSelected()) {
+
+        if (rbt10x10.isSelected()) {
             tamañoTablero = 10;
-        } else if (rbt4x4.isSelected()) {
+        } else if (rbt13x13.isSelected()) {
             tamañoTablero = 13;
-        } else if (rbt5x5.isSelected()) {
+        } else if (rbt15x15.isSelected()) {
             tamañoTablero = 15;
         }
 
         if (!txtJugador1.getText().isEmpty() && !txtJugador2.getText().isEmpty() && tamañoTablero != 0) {
-            PanelTablero_SerpientesyEscaleras panelTablero = new PanelTablero_SerpientesyEscaleras(jugador1, jugador2, jugador3, jugador4, tamañoTablero);
+            List<Jugador> jugadores = new ArrayList<>();
+            jugadores.add(jugador1);
+            jugadores.add(jugador2);
+
+            if (!txtJugador3.getText().isEmpty()) {
+                jugadores.add(jugador3);
+            }
+
+            if (!txtJugador4.getText().isEmpty()) {
+                jugadores.add(jugador4);
+            }
+
+            PanelTablero_SerpientesyEscaleras panelTablero = new PanelTablero_SerpientesyEscaleras(jugadores, tamañoTablero);
             panelTablero.setVisible(true);
             this.dispose();
         } else {
@@ -566,7 +576,6 @@ public class PanelMain_SerpientesyEscaleras extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -580,9 +589,9 @@ public class PanelMain_SerpientesyEscaleras extends javax.swing.JFrame {
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JPanel panelBoton;
     private javax.swing.JPanel panelFondo;
-    private javax.swing.JRadioButton rbt3x3;
-    private javax.swing.JRadioButton rbt4x4;
-    private javax.swing.JRadioButton rbt5x5;
+    private javax.swing.JRadioButton rbt10x10;
+    private javax.swing.JRadioButton rbt13x13;
+    private javax.swing.JRadioButton rbt15x15;
     private javax.swing.ButtonGroup rbtTamañoTablero;
     private javax.swing.JTextField txtJugador1;
     private javax.swing.JTextField txtJugador2;
