@@ -15,16 +15,14 @@ import javax.swing.JOptionPane;
 public class Jugador {
 
     private String nombre;
-    private String marca;
-    private Color color;
+
 
     public Jugador() {
+        
     }
 
-    public Jugador(String nombre, String marca, Color color) {
+    public Jugador(String nombre) {
         this.nombre = nombre;
-        this.marca = marca;
-        this.color = color;
     }
 
     public String getNombre() {
@@ -35,23 +33,8 @@ public class Jugador {
         this.nombre = nombre;
     }
 
-    public String getMarca() {
-        return marca;
-    }
 
-    public void setMarca(String marca) {
-        this.marca = marca;
-    }
-
-    public Color getColor() {
-        return color;
-    }
-
-    public void setColor(Color color) {
-        this.color = color;
-    }
-
-    public void configurarJugador(Jugador jugador, String nombre, String colorSeleccionado, JLabel labelNombre, JLabel labelFicha) {
+    public void configurarJugador(Jugador jugador, String nombre, String colorSeleccionado, JLabel labelNombre) {
 
         if (nombre.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Tienes que poner un nombre de jugador.", "Alerta", JOptionPane.WARNING_MESSAGE);

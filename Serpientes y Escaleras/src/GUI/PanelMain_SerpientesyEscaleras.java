@@ -396,7 +396,8 @@ public class PanelMain_SerpientesyEscaleras extends javax.swing.JFrame {
         }
 
         if (!txtJugador1.getText().isEmpty() && !txtJugador2.getText().isEmpty() && tamañoTablero != 0) {
-
+            PanelTablero_SerpientesyEscaleras panelTablero = new PanelTablero_SerpientesyEscaleras(jugador1, jugador2, jugador3, jugador4, tamañoTablero);
+            panelTablero.setVisible(true);
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, "Faltan campos por llenar.", "Alerta", JOptionPane.WARNING_MESSAGE);
