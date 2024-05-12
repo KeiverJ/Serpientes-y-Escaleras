@@ -16,14 +16,9 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
     private int jugadorActual;
     int tamañoTableroActual;
 
-    Jugador jugador1 = new Jugador(0, "", new ImageIcon(getClass().getResource("/resources/ficha1.png")));
-    Jugador jugador2 = new Jugador(1, "", new ImageIcon(getClass().getResource("/resources/ficha2.png")));
-    Jugador jugador3 = new Jugador(2, "", new ImageIcon(getClass().getResource("/resources/ficha3.png")));
-    Jugador jugador4 = new Jugador(3, "", new ImageIcon(getClass().getResource("/resources/ficha4.png")));
-
-    Tablero tablero10x10 = new Tablero(10, 10);
-    Tablero tablero13x13 = new Tablero(13, 13);
-    Tablero tablero15x15 = new Tablero(15, 15);
+    Tablero tablero10x10 = new Tablero(10, 10, jugadores);
+    Tablero tablero13x13 = new Tablero(13, 13, jugadores);
+    Tablero tablero15x15 = new Tablero(15, 15, jugadores);
 
     public PanelTablero_SerpientesyEscaleras(List<Jugador> jugadores, int tamañoTablero) {
         this.jugadores = jugadores;
@@ -57,8 +52,8 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
         switch (tamañoTablero) {
             case 10:
                 jTabbedPane1.setSelectedIndex(0);
-                jPanel13x14.setLayout(new BorderLayout());
-                jPanel13x14.add(tablero10x10, BorderLayout.CENTER);
+                jPanel10x10.setLayout(new BorderLayout());
+                jPanel10x10.add(tablero10x10, BorderLayout.CENTER);
                 tablero10x10.revalidate();
                 tablero10x10.repaint();
                 rbt10x10.setEnabled(false);
@@ -131,7 +126,7 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
         lblLanzarDado = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel4x4 = new javax.swing.JPanel();
-        jPanel13x14 = new javax.swing.JPanel();
+        jPanel10x10 = new javax.swing.JPanel();
         jPanel5x5 = new javax.swing.JPanel();
         jPanel13x13 = new javax.swing.JPanel();
         jPanel3x3 = new javax.swing.JPanel();
@@ -333,18 +328,18 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
 
         jPanel4x4.setBackground(new java.awt.Color(240, 232, 216));
 
-        jPanel13x14.setBackground(new java.awt.Color(162, 213, 242));
-        jPanel13x14.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel13x14.setPreferredSize(new java.awt.Dimension(220, 220));
+        jPanel10x10.setBackground(new java.awt.Color(162, 213, 242));
+        jPanel10x10.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel10x10.setPreferredSize(new java.awt.Dimension(220, 220));
 
-        javax.swing.GroupLayout jPanel13x14Layout = new javax.swing.GroupLayout(jPanel13x14);
-        jPanel13x14.setLayout(jPanel13x14Layout);
-        jPanel13x14Layout.setHorizontalGroup(
-            jPanel13x14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jPanel10x10Layout = new javax.swing.GroupLayout(jPanel10x10);
+        jPanel10x10.setLayout(jPanel10x10Layout);
+        jPanel10x10Layout.setHorizontalGroup(
+            jPanel10x10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 676, Short.MAX_VALUE)
         );
-        jPanel13x14Layout.setVerticalGroup(
-            jPanel13x14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanel10x10Layout.setVerticalGroup(
+            jPanel10x10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 676, Short.MAX_VALUE)
         );
 
@@ -354,14 +349,14 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
             jPanel4x4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4x4Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addComponent(jPanel13x14, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel10x10, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(32, Short.MAX_VALUE))
         );
         jPanel4x4Layout.setVerticalGroup(
             jPanel4x4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4x4Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addComponent(jPanel13x14, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel10x10, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(48, Short.MAX_VALUE))
         );
 
@@ -539,38 +534,6 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_lblLanzarDadoMousePressed
 
-    public Jugador getJugador1() {
-        return jugador1;
-    }
-
-    public void setJugador1(Jugador jugador1) {
-        this.jugador1 = jugador1;
-    }
-
-    public Jugador getJugador2() {
-        return jugador2;
-    }
-
-    public void setJugador2(Jugador jugador2) {
-        this.jugador2 = jugador2;
-    }
-
-    public Jugador getJugador3() {
-        return jugador3;
-    }
-
-    public void setJugador3(Jugador jugador3) {
-        this.jugador3 = jugador3;
-    }
-
-    public Jugador getJugador4() {
-        return jugador4;
-    }
-
-    public void setJugador4(Jugador jugador4) {
-        this.jugador4 = jugador4;
-    }
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup btngTamaño;
@@ -578,8 +541,8 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel10x10;
     private javax.swing.JPanel jPanel13x13;
-    private javax.swing.JPanel jPanel13x14;
     private javax.swing.JPanel jPanel15x15;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3x3;

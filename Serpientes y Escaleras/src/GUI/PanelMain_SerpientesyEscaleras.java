@@ -8,6 +8,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 
@@ -16,6 +17,8 @@ import javax.swing.border.Border;
  * @author keiver
  */
 public class PanelMain_SerpientesyEscaleras extends javax.swing.JFrame {
+
+    private Jugador[] jugadores = new Jugador[4];
 
     /**
      * Creates new form PanelMain_Triquitraque
@@ -351,10 +354,15 @@ public class PanelMain_SerpientesyEscaleras extends javax.swing.JFrame {
     }//GEN-LAST:event_panelFondoMousePressed
 
     private void lblInicarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblInicarMousePressed
-        Jugador jugador1 = new Jugador();
-        Jugador jugador2 = new Jugador();
-        Jugador jugador3 = new Jugador();
-        Jugador jugador4 = new Jugador();
+        ImageIcon jugador1Icon = new ImageIcon(getClass().getResource("/resources/ficha1.png"));
+        ImageIcon jugador2Icon = new ImageIcon(getClass().getResource("/resources/ficha2.png"));
+        ImageIcon jugador3Icon = new ImageIcon(getClass().getResource("/resources/ficha3.png"));
+        ImageIcon jugador4Icon = new ImageIcon(getClass().getResource("/resources/ficha4.png"));
+
+        Jugador jugador1 = new Jugador(1, txtJugador1.getText(), jugador1Icon);
+        Jugador jugador2 = new Jugador(2, txtJugador2.getText(), jugador2Icon);
+        Jugador jugador3 = new Jugador(3, txtJugador3.getText(), jugador3Icon);
+        Jugador jugador4 = new Jugador(4, txtJugador4.getText(), jugador4Icon);
 
         if (txtJugador1.getText().equals("")) {
             if (txtJugador1.hasFocus()) {

@@ -3,7 +3,6 @@ package GUI;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
@@ -14,7 +13,6 @@ public class Tablero extends JPanel {
 
     private static final int BOARD_SIZE = 10;
     private static final int CELL_SIZE = 55;
-    private Jugador jugador;
     private final int rows;
     private final int cols;
     private int[] serpientesInicio;
@@ -25,21 +23,23 @@ public class Tablero extends JPanel {
 
     private List<Jugador> jugadores;
 
-    public Tablero(int rows, int cols) {
+    ImageIcon serpienteIcon = new ImageIcon(getClass().getResource("/resources/serpiente.png"));
+    ImageIcon escaleraIcon = new ImageIcon(getClass().getResource("/resources/escalera.png"));
+
+    public Tablero(int rows, int cols, List<Jugador> jugadores) {
         this.rows = rows;
         this.cols = cols;
-        jugadores = new ArrayList<>();
+        this.jugadores = new ArrayList<>();
         configurarSerpientesYEscaleras();
-        jugadorActual = 0;
-
+        jugadorActual = 1;
     }
 
     private void configurarSerpientesYEscaleras() {
         if (rows == 10 && cols == 10) {
-            serpientesInicio = new int[]{11, 42, 67, 73};
-            serpientesFin = new int[]{7, 38, 60, 91};
-            escalerasInicio = new int[]{2, 7, 8, 15, 21, 28, 36, 51, 71, 78, 87};
-            escalerasFin = new int[]{39, 14, 31, 26, 42, 84, 44, 67, 91, 98, 94};
+            serpientesInicio = new int[]{11, 42, 67, 73, 90};
+            serpientesFin = new int[]{7, 38, 60, 60, 3};
+            escalerasInicio = new int[]{2, 17, 28, 36, 21, 7, 15, 51, 71, 78, 87};
+            escalerasFin = new int[]{39, 44, 84, 44, 42, 14, 26, 67, 91, 98, 94};
         } else if (rows == 13 && cols == 13) {
             serpientesInicio = new int[]{4, 23, 35, 47, 66, 81};
             serpientesFin = new int[]{1, 18, 27, 40, 52, 75};
@@ -130,17 +130,16 @@ public class Tablero extends JPanel {
         }
 
         for (Jugador jugador : jugadores) {
-            ImageIcon icono = jugador.getFichaIcon();
-            if (icono != null) {
-                int position = jugador.getPosition() - 1;
-                int row = (rows - 1) - position / cols;
-                int col = position % cols;
-                int x = (int) (col * CELL_SIZE_X + CELL_SIZE_X / 4);
-                int y = (int) (row * CELL_SIZE_Y + CELL_SIZE_Y / 4);
+            int position = jugador.getPosition() - 1;
+            int row = (rows - 1) - position / cols;
+            int col = position % cols;
+            int x = (int) (col * CELL_SIZE_X + CELL_SIZE_X / 4);
+            int y = (int) (row * CELL_SIZE_Y + CELL_SIZE_Y / 4);
 
-                Image img = icono.getImage();
-                g.drawImage(img, x, y, CELL_SIZE / 2, CELL_SIZE / 2, null);
-            }
+            ImageIcon jugadorIcon = jugador.getFichaIcon();
+            Image img = jugadorIcon.getImage();
+
+            g.drawImage(img, x, y, CELL_SIZE / 2, CELL_SIZE / 2, this);
         }
     }
 
@@ -161,6 +160,7 @@ public class Tablero extends JPanel {
         jugador.setPosition(nuevaPos);
 
         if (nuevaPos == rows * cols) {
+            JOptionPane.showMessageDialog(this, "¡Felicidades! El jugador " + jugador.getNombre() + " ha ganado el juego.");
 
         }
 
