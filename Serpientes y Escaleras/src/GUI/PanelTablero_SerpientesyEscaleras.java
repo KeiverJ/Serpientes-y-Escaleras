@@ -541,7 +541,7 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
     }//GEN-LAST:event_lblLanzarDadoMouseExited
 
     private void lblLanzarDadoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLanzarDadoMousePressed
-        int resultado = dado();
+        int resultado = Dado.lanzar();
         System.out.println(resultado);
 
         Jugador jugadorActual = jugadores.get(this.jugadorActual);
@@ -563,30 +563,7 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
                 break;
         }
 
-        ImageIcon imagenDado;
-        switch (resultado) {
-            case 1:
-                imagenDado = new ImageIcon(getClass().getResource("/resources/1.png"));
-                break;
-            case 2:
-                imagenDado = new ImageIcon(getClass().getResource("/resources/2.png"));
-                break;
-            case 3:
-                imagenDado = new ImageIcon(getClass().getResource("/resources/3.png"));
-                break;
-            case 4:
-                imagenDado = new ImageIcon(getClass().getResource("/resources/4.png"));
-                break;
-            case 5:
-                imagenDado = new ImageIcon(getClass().getResource("/resources/5.png"));
-                break;
-            default:
-                imagenDado = new ImageIcon(getClass().getResource("/resources/6.png"));
-                break;
-        }
-
-        Image imagenRedimensionada = imagenDado.getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH);
-        ImageIcon iconoRedimensionado = new ImageIcon(imagenRedimensionada);
+        ImageIcon iconoRedimensionado = Dado.obtenerImagenDadoRedimensionada(resultado, 120, 120);
         lblDado.setIcon(iconoRedimensionado);
     }//GEN-LAST:event_lblLanzarDadoMousePressed
 

@@ -59,7 +59,6 @@ public class Tablero extends JPanel {
 
         int maxIntentos = 100;
 
-        // Ubicar serpientes
         for (int i = 0; i < numSerpientes; i++) {
             int inicioSerpiente = ubicarUbicacion(random, casillasPosibles);
             serpientesInicio[i] = inicioSerpiente;
@@ -71,7 +70,6 @@ public class Tablero extends JPanel {
             serpientesFin[i] = finSerpiente;
         }
 
-        // Ubicar escaleras
         for (int i = 0; i < numEscaleras; i++) {
             int inicioEscalera = ubicarUbicacion(random, casillasPosibles);
             escalerasInicio[i] = inicioEscalera;
