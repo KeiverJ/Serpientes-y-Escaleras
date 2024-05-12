@@ -56,17 +56,3 @@ public class Jugador {
         return new Color(r, g, b);
     }
 }
-
-// Este método no es necesario ya que el constructor ya configura el jugador
-/*
-    public void configurarJugador(Jugador jugador, String nombre, ImageIcon fichaIcon, JLabel labelNombre) {
-        if (nombre.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Tienes que poner un nombre de jugador.", "Alerta", JOptionPane.WARNING_MESSAGE);
-        } else {
-            jugador.setNombre(nombre);
-            jugador.setFichaIcon(fichaIcon);
-            jugador.getColor();
-            labelNombre.setText(jugador.getNombre());
-        }
-    }
- */

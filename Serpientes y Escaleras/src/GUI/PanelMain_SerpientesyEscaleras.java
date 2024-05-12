@@ -43,6 +43,33 @@ public class PanelMain_SerpientesyEscaleras extends javax.swing.JFrame {
         txtJugador2.setText(nombre);
     }
 
+    private int pedirCantidad(String mensaje) {
+        int cantidad = 0;
+        boolean cantidadValida = false;
+
+        while (!cantidadValida) {
+            try {
+                cantidad = Integer.parseInt(JOptionPane.showInputDialog(mensaje));
+
+                if (cantidad < 0) {
+                    JOptionPane.showMessageDialog(this, "La cantidad debe ser un número positivo.", "Error", JOptionPane.ERROR_MESSAGE);
+                } else if (rbt10x10.isSelected() && cantidad > 10) {
+                    JOptionPane.showMessageDialog(this, "La cantidad máxima permitida para el tablero 10x10 es 10.", "Error", JOptionPane.ERROR_MESSAGE);
+                } else if (rbt13x13.isSelected() && cantidad > 25) {
+                    JOptionPane.showMessageDialog(this, "La cantidad máxima permitida para el tablero 13x13 es 25.", "Error", JOptionPane.ERROR_MESSAGE);
+                } else if (rbt15x15.isSelected() && cantidad > 35) {
+                    JOptionPane.showMessageDialog(this, "La cantidad máxima permitida para el tablero 15x15 es 35.", "Error", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    cantidadValida = true;
+                }
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Entrada inválida. Ingrese un número entero.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+
+        return cantidad;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -343,7 +370,7 @@ public class PanelMain_SerpientesyEscaleras extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelFondo, javax.swing.GroupLayout.DEFAULT_SIZE, 561, Short.MAX_VALUE)
+            .addComponent(panelFondo, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -397,12 +424,20 @@ public class PanelMain_SerpientesyEscaleras extends javax.swing.JFrame {
         }
 
         int tamañoTablero = 0;
+        int numSerpientes = 0;
+        int numEscaleras = 0;
 
         if (rbt10x10.isSelected()) {
+            numSerpientes = pedirCantidad("Ingrese la cantidad de serpientes para el tablero 10x10:");
+            numEscaleras = pedirCantidad("Ingrese la cantidad de escaleras para el tablero 10x10:");
             tamañoTablero = 10;
         } else if (rbt13x13.isSelected()) {
+            numSerpientes = pedirCantidad("Ingrese la cantidad de serpientes para el tablero 13x13:");
+            numEscaleras = pedirCantidad("Ingrese la cantidad de escaleras para el tablero 13x13:");
             tamañoTablero = 13;
         } else if (rbt15x15.isSelected()) {
+            numSerpientes = pedirCantidad("Ingrese la cantidad de serpientes para el tablero 15x15:");
+            numEscaleras = pedirCantidad("Ingrese la cantidad de escaleras para el tablero 15x15:");
             tamañoTablero = 15;
         }
 
@@ -419,7 +454,7 @@ public class PanelMain_SerpientesyEscaleras extends javax.swing.JFrame {
                 jugadores.add(jugador4);
             }
 
-            PanelTablero_SerpientesyEscaleras panelTablero = new PanelTablero_SerpientesyEscaleras(jugadores, tamañoTablero);
+            PanelTablero_SerpientesyEscaleras panelTablero = new PanelTablero_SerpientesyEscaleras(jugadores, tamañoTablero, numEscaleras, numSerpientes);
             panelTablero.setVisible(true);
             this.dispose();
         } else {

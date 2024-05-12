@@ -4,14 +4,15 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class Tablero extends JPanel {
 
-    private static final int BOARD_SIZE = 10;
     private static final int CELL_SIZE = 55;
     private final int rows;
     private final int cols;
@@ -23,39 +24,116 @@ public class Tablero extends JPanel {
 
     private List<Jugador> jugadores;
 
-    ImageIcon serpienteIcon = new ImageIcon(getClass().getResource("/resources/serpiente.png"));
-    ImageIcon escaleraIcon = new ImageIcon(getClass().getResource("/resources/escalera.png"));
-
-    public Tablero(int rows, int cols, List<Jugador> jugadores) {
+    public Tablero(int rows, int cols, List<Jugador> jugadores, int numEscaleras, int numSerpientes) {
         this.rows = rows;
         this.cols = cols;
         this.jugadores = new ArrayList<>();
-        configurarSerpientesYEscaleras();
+        configurarSerpientesYEscaleras(numEscaleras, numSerpientes);
         jugadorActual = 1;
     }
 
-    private void configurarSerpientesYEscaleras() {
-        if (rows == 10 && cols == 10) {
-            serpientesInicio = new int[]{11, 42, 67, 73, 90};
-            serpientesFin = new int[]{7, 38, 60, 60, 3};
-            escalerasInicio = new int[]{2, 17, 28, 36, 21, 7, 15, 51, 71, 78, 87};
-            escalerasFin = new int[]{39, 44, 84, 44, 42, 14, 26, 67, 91, 98, 94};
-        } else if (rows == 13 && cols == 13) {
-            serpientesInicio = new int[]{4, 23, 35, 47, 66, 81};
-            serpientesFin = new int[]{1, 18, 27, 40, 52, 75};
-            escalerasInicio = new int[]{5, 9, 14, 20, 28, 35, 43, 46, 50, 70, 73};
-            escalerasFin = new int[]{11, 31, 34, 39, 42, 50, 69, 78, 91, 98, 99};
-        } else if (rows == 15 && cols == 15) {
-            serpientesInicio = new int[]{6, 22, 33, 42, 57, 66, 79, 92, 98};
-            serpientesFin = new int[]{1, 10, 23, 28, 38, 53, 63, 84, 94};
-            escalerasInicio = new int[]{2, 6, 13, 17, 22, 33, 37, 38, 43, 52, 56, 61, 68, 74, 82};
-            escalerasFin = new int[]{38, 10, 23, 28, 41, 49, 54, 49, 57, 77, 63, 79, 79, 92, 94};
-        } else {
-            serpientesInicio = new int[0];
-            serpientesFin = new int[0];
-            escalerasInicio = new int[0];
-            escalerasFin = new int[0];
+    private void configurarSerpientesYEscaleras(int numEscaleras, int numSerpientes) {
+        if (numEscaleras <= 0 || numSerpientes <= 0) {
+            System.err.println("El número de escaleras y serpientes debe ser positivo.");
+            return;
         }
+
+        Random random = new Random();
+        int totalCasillas = rows * cols;
+        int cantidadUbicaciones = numEscaleras + numSerpientes;
+
+        if (totalCasillas < cantidadUbicaciones) {
+            System.err.println("La cantidad de serpientes y escaleras excede el tamaño del tablero.");
+            return;
+        }
+
+        serpientesInicio = new int[numSerpientes];
+        serpientesFin = new int[numSerpientes];
+        escalerasInicio = new int[numEscaleras];
+        escalerasFin = new int[numEscaleras];
+
+        List<Integer> casillasPosibles = new ArrayList<>();
+        for (int i = 2; i < totalCasillas; i++) {
+            casillasPosibles.add(i);
+        }
+
+        int maxIntentos = 100;
+
+        // Ubicar serpientes
+        for (int i = 0; i < numSerpientes; i++) {
+            int inicioSerpiente = ubicarUbicacion(random, casillasPosibles);
+            serpientesInicio[i] = inicioSerpiente;
+            int finSerpiente = generarUbicacionFinalSerpiente(random, inicioSerpiente, casillasPosibles, maxIntentos);
+            if (finSerpiente == -1) {
+                System.err.println("No se pudo ubicar todas las serpientes y escaleras en el tablero.");
+                return;
+            }
+            serpientesFin[i] = finSerpiente;
+        }
+
+        // Ubicar escaleras
+        for (int i = 0; i < numEscaleras; i++) {
+            int inicioEscalera = ubicarUbicacion(random, casillasPosibles);
+            escalerasInicio[i] = inicioEscalera;
+            int finEscalera = generarUbicacionFinalEscalera(random, inicioEscalera, casillasPosibles, maxIntentos);
+            if (finEscalera == -1) {
+                System.err.println("No se pudo ubicar todas las serpientes y escaleras en el tablero.");
+                return;
+            }
+            escalerasFin[i] = finEscalera;
+        }
+    }
+
+    private int generarUbicacionFinalSerpiente(Random random, int inicioUbicacion, List<Integer> casillasPosibles, int maxIntentos) {
+        int intentos = 0;
+        int finUbicacion;
+        do {
+            finUbicacion = random.nextInt(inicioUbicacion - 2) + 1;
+            intentos++;
+            if (intentos > maxIntentos) {
+                return -1;
+            }
+        } while (!casillasPosibles.contains(finUbicacion));
+
+        casillasPosibles.remove(Integer.valueOf(finUbicacion));
+        return finUbicacion;
+    }
+
+    private int generarUbicacionFinalEscalera(Random random, int inicioUbicacion, List<Integer> casillasPosibles, int maxIntentos) {
+        int intentos = 0;
+        int finUbicacion;
+        do {
+            finUbicacion = random.nextInt(rows * cols - inicioUbicacion) + inicioUbicacion + 1; 
+            intentos++;
+            if (intentos > maxIntentos) {
+                return -1;
+            }
+        } while (!casillasPosibles.contains(finUbicacion));
+
+        casillasPosibles.remove(Integer.valueOf(finUbicacion));
+        return finUbicacion;
+    }
+
+    private int ubicarUbicacion(Random random, List<Integer> casillasPosibles) {
+        int index = random.nextInt(casillasPosibles.size());
+        int ubicacion = casillasPosibles.get(index);
+        casillasPosibles.remove(index);
+        return ubicacion;
+    }
+
+    public String obtenerUbicacionesSerpientesYEscaleras() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Ubicaciones de las serpientes:\n");
+        for (int i = 0; i < serpientesInicio.length; i++) {
+            sb.append("Serpiente ").append(i + 1).append(": ").append(serpientesInicio[i]).append(" -> ").append(serpientesFin[i]).append("\n");
+        }
+
+        sb.append("\nUbicaciones de las escaleras:\n");
+        for (int i = 0; i < escalerasInicio.length; i++) {
+            sb.append("Escalera ").append(i + 1).append(": ").append(escalerasInicio[i]).append(" -> ").append(escalerasFin[i]).append("\n");
+        }
+
+        return sb.toString();
     }
 
     @Override
@@ -161,19 +239,13 @@ public class Tablero extends JPanel {
 
         if (nuevaPos == rows * cols) {
             JOptionPane.showMessageDialog(this, "¡Felicidades! El jugador " + jugador.getNombre() + " ha ganado el juego.");
-
         }
 
         repaint();
     }
 
     private boolean isSerpienteInicio(int pos) {
-        for (int i : serpientesInicio) {
-            if (i == pos) {
-                return true;
-            }
-        }
-        return false;
+        return contains(serpientesInicio, pos);
     }
 
     private int getSerpienteFin(int pos) {
@@ -186,12 +258,7 @@ public class Tablero extends JPanel {
     }
 
     private boolean isEscaleraInicio(int pos) {
-        for (int i : escalerasInicio) {
-            if (i == pos) {
-                return true;
-            }
-        }
-        return false;
+        return contains(escalerasInicio, pos);
     }
 
     private int getEscaleraFin(int pos) {
@@ -203,6 +270,15 @@ public class Tablero extends JPanel {
         return pos;
     }
 
+    private boolean contains(int[] array, int value) {
+        for (int i : array) {
+            if (i == value) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void agregarJugador(Jugador jugador) {
         jugadores.add(jugador);
     }
@@ -210,5 +286,4 @@ public class Tablero extends JPanel {
     public void removerJugador(Jugador jugador) {
         jugadores.remove(jugador);
     }
-
 }
