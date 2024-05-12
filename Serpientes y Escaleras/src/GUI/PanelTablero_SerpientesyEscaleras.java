@@ -545,7 +545,8 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
     }//GEN-LAST:event_lblLanzarDadoMouseExited
 
     private void lblLanzarDadoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLanzarDadoMousePressed
-        final int resultado = Dado.lanzar();
+        Dado dado = new Dado(); 
+        final int resultado = dado.getValorDado(); 
         System.out.println(resultado);
 
         final Timer timer = new Timer(50, null);
@@ -557,12 +558,11 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 long tiempoTranscurrido = System.currentTimeMillis() - tiempoInicio;
                 if (tiempoTranscurrido < 1000) {
-                    int valorAleatorio = new Random().nextInt(6) + 1;
-                    ImageIcon iconoAleatorio = Dado.obtenerImagenDadoRedimensionada(valorAleatorio, 120, 120);
+                    ImageIcon iconoAleatorio = dado.obtenerImagenDadoAleatorioRedimensionado(120, 120);
                     lblDado.setIcon(iconoAleatorio);
                 } else {
                     timer.stop();
-                    ImageIcon iconoResultado = Dado.obtenerImagenDadoRedimensionada(resultado, 120, 120);
+                    ImageIcon iconoResultado = dado.obtenerImagenDadoRedimensionada(120, 120);
                     lblDado.setIcon(iconoResultado);
 
                     Jugador jugadorActual = jugadores.get(jugadorActualIndex);
