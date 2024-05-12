@@ -32,45 +32,13 @@ public class Tablero extends JPanel {
         jugadorActual = 1;
     }
 
-    private List<int[][]> generarCombinacionesUbicaciones(int numEscaleras, int numSerpientes) {
-        List<int[][]> combinaciones = new ArrayList<>();
-        int totalCasillas = rows * cols;
-        int[] casillasPosibles = new int[totalCasillas - 1];
-        for (int i = 0; i < casillasPosibles.length; i++) {
-            casillasPosibles[i] = i + 2;
-        }
-
-        generarCombinacionesRecursivas(combinaciones, new int[numEscaleras][2], new int[numSerpientes][2], casillasPosibles, 0, 0, 0);
-        return combinaciones;
-    }
-
-    private void generarCombinacionesRecursivas(List<int[][]> combinaciones, int[][] escalerasUbicaciones, int[][] serpientesUbicaciones, int[] casillasPosibles, int indiceEscalera, int indiceSerpiente, int indiceArray) {
-        if (indiceEscalera == escalerasUbicaciones.length && indiceSerpiente == serpientesUbicaciones.length) {
-            int[][] ubicaciones = new int[escalerasUbicaciones.length + serpientesUbicaciones.length][2];
-            System.arraycopy(escalerasUbicaciones, 0, ubicaciones, 0, escalerasUbicaciones.length);
-            System.arraycopy(serpientesUbicaciones, 0, ubicaciones, escalerasUbicaciones.length, serpientesUbicaciones.length);
-            combinaciones.add(ubicaciones);
-            return;
-        }
-
-        for (int i = indiceArray; i < casillasPosibles.length; i++) {
-            int casilla = casillasPosibles[i];
-            if (indiceEscalera < escalerasUbicaciones.length) {
-                escalerasUbicaciones[indiceEscalera][0] = casilla;
-                generarCombinacionesRecursivas(combinaciones, escalerasUbicaciones, serpientesUbicaciones, casillasPosibles, indiceEscalera + 1, indiceSerpiente, i + 1);
-            } else {
-                serpientesUbicaciones[indiceSerpiente][0] = casilla;
-                generarCombinacionesRecursivas(combinaciones, escalerasUbicaciones, serpientesUbicaciones, casillasPosibles, indiceEscalera, indiceSerpiente + 1, i + 1);
-            }
-        }
-    }
-
     private void configurarSerpientesYEscaleras(int numEscaleras, int numSerpientes) {
         if (numEscaleras <= 0 || numSerpientes <= 0) {
             System.err.println("El número de escaleras y serpientes debe ser positivo.");
             return;
         }
 
+        Random random = new Random();
         int totalCasillas = rows * cols;
         int cantidadUbicaciones = numEscaleras + numSerpientes;
 
@@ -79,113 +47,78 @@ public class Tablero extends JPanel {
             return;
         }
 
-        List<int[][]> combinacionesUbicaciones = generarCombinacionesUbicaciones(numEscaleras, numSerpientes);
-        Random random = new Random();
-        int[][] ubicacionesValidas = null;
-
-        for (int[][] ubicaciones : combinacionesUbicaciones) {
-            if (sonUbicacionesValidas(ubicaciones, numEscaleras, numSerpientes)) {
-                ubicacionesValidas = ubicaciones;
-                break;
-            }
-        }
-
-        if (ubicacionesValidas == null) {
-            System.err.println("No se encontraron ubicaciones válidas para las serpientes y escaleras.");
-            return;
-        }
-
         serpientesInicio = new int[numSerpientes];
         serpientesFin = new int[numSerpientes];
         escalerasInicio = new int[numEscaleras];
         escalerasFin = new int[numEscaleras];
 
-        for (int i = 0; i < numEscaleras; i++) {
-            escalerasInicio[i] = ubicacionesValidas[i][0];
-            escalerasFin[i] = generarUbicacionFinalEscalera(random, escalerasInicio[i], ubicacionesValidas, i, numEscaleras, numSerpientes);
-        }
-
-        for (int i = 0; i < numSerpientes; i++) {
-            serpientesInicio[i] = ubicacionesValidas[numEscaleras + i][0];
-            serpientesFin[i] = generarUbicacionFinalSerpiente(random, serpientesInicio[i], ubicacionesValidas, numEscaleras, numSerpientes);
-        }
-    }
-
-    private boolean sonUbicacionesValidas(int[][] ubicaciones, int numEscaleras, int numSerpientes) {
-        int[] escalerasInicio = new int[numEscaleras];
-        int[] escalerasFin = new int[numEscaleras];
-        int[] serpientesInicio = new int[numSerpientes];
-        int[] serpientesFin = new int[numSerpientes];
-
-        for (int i = 0; i < numEscaleras; i++) {
-            escalerasInicio[i] = ubicaciones[i][0];
-        }
-
-        for (int i = 0; i < numSerpientes; i++) {
-            serpientesInicio[i] = ubicaciones[numEscaleras + i][0];
-        }
-
-        for (int i = 0; i < numEscaleras; i++) {
-            escalerasFin[i] = generarUbicacionFinalEscalera(new Random(), escalerasInicio[i], ubicaciones, i, numEscaleras, numSerpientes);
-            if (escalerasFin[i] == -1) {
-                return false;
-            }
-        }
-
-        for (int i = 0; i < numSerpientes; i++) {
-            serpientesFin[i] = generarUbicacionFinalSerpiente(new Random(), serpientesInicio[i], ubicaciones, numEscaleras, numSerpientes);
-            if (serpientesFin[i] == -1) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    private int generarUbicacionFinalEscalera(Random random, int inicioUbicacion, int[][] ubicaciones, int indiceEscalera, int numEscaleras, int numSerpientes) {
         List<Integer> casillasPosibles = new ArrayList<>();
-        for (int i = inicioUbicacion + 1; i <= rows * cols; i++) {
-            boolean estaOcupada = false;
-            for (int j = 0; j < numEscaleras + numSerpientes; j++) {
-                if (ubicaciones[j][0] == i || (j < numEscaleras && ubicaciones[j][1] == i) || (j >= numEscaleras && j - numEscaleras < indiceEscalera && ubicaciones[j][1] == i)) {
-                    estaOcupada = true;
-                    break;
-                }
-            }
-            if (!estaOcupada) {
-                casillasPosibles.add(i);
-            }
+        for (int i = 2; i < totalCasillas; i++) {
+            casillasPosibles.add(i);
         }
 
-        if (casillasPosibles.isEmpty()) {
-            return -1;
+        int maxIntentos = 100;
+
+        // Ubicar serpientes
+        for (int i = 0; i < numSerpientes; i++) {
+            int inicioSerpiente = ubicarUbicacion(random, casillasPosibles);
+            serpientesInicio[i] = inicioSerpiente;
+            int finSerpiente = generarUbicacionFinalSerpiente(random, inicioSerpiente, casillasPosibles, maxIntentos);
+            if (finSerpiente == -1) {
+                System.err.println("No se pudo ubicar todas las serpientes y escaleras en el tablero.");
+                return;
+            }
+            serpientesFin[i] = finSerpiente;
         }
 
-        int index = random.nextInt(casillasPosibles.size());
-        return casillasPosibles.get(index);
+        // Ubicar escaleras
+        for (int i = 0; i < numEscaleras; i++) {
+            int inicioEscalera = ubicarUbicacion(random, casillasPosibles);
+            escalerasInicio[i] = inicioEscalera;
+            int finEscalera = generarUbicacionFinalEscalera(random, inicioEscalera, casillasPosibles, maxIntentos);
+            if (finEscalera == -1) {
+                System.err.println("No se pudo ubicar todas las serpientes y escaleras en el tablero.");
+                return;
+            }
+            escalerasFin[i] = finEscalera;
+        }
     }
 
-    private int generarUbicacionFinalSerpiente(Random random, int inicioUbicacion, int[][] ubicaciones, int numEscaleras, int numSerpientes) {
-        List<Integer> casillasPosibles = new ArrayList<>();
-        for (int i = 1; i < inicioUbicacion; i++) {
-            boolean estaOcupada = false;
-            for (int j = 0; j < numEscaleras + numSerpientes; j++) {
-                if (ubicaciones[j][0] == i || (j >= numEscaleras && ubicaciones[j][1] == i)) {
-                    estaOcupada = true;
-                    break;
-                }
+    private int generarUbicacionFinalSerpiente(Random random, int inicioUbicacion, List<Integer> casillasPosibles, int maxIntentos) {
+        int intentos = 0;
+        int finUbicacion;
+        do {
+            finUbicacion = random.nextInt(inicioUbicacion - 2) + 1;
+            intentos++;
+            if (intentos > maxIntentos) {
+                return -1;
             }
-            if (!estaOcupada) {
-                casillasPosibles.add(i);
+        } while (!casillasPosibles.contains(finUbicacion));
+
+        casillasPosibles.remove(Integer.valueOf(finUbicacion));
+        return finUbicacion;
+    }
+
+    private int generarUbicacionFinalEscalera(Random random, int inicioUbicacion, List<Integer> casillasPosibles, int maxIntentos) {
+        int intentos = 0;
+        int finUbicacion;
+        do {
+            finUbicacion = random.nextInt(rows * cols - inicioUbicacion) + inicioUbicacion + 1; 
+            intentos++;
+            if (intentos > maxIntentos) {
+                return -1;
             }
-        }
+        } while (!casillasPosibles.contains(finUbicacion));
 
-        if (casillasPosibles.isEmpty()) {
-            return -1;
-        }
+        casillasPosibles.remove(Integer.valueOf(finUbicacion));
+        return finUbicacion;
+    }
 
+    private int ubicarUbicacion(Random random, List<Integer> casillasPosibles) {
         int index = random.nextInt(casillasPosibles.size());
-        return casillasPosibles.get(index);
+        int ubicacion = casillasPosibles.get(index);
+        casillasPosibles.remove(index);
+        return ubicacion;
     }
 
     public String obtenerUbicacionesSerpientesYEscaleras() {

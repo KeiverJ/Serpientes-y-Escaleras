@@ -146,6 +146,8 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
         panelBoton3 = new javax.swing.JPanel();
         lblLanzarDado = new javax.swing.JLabel();
         lblDado = new javax.swing.JLabel();
+        panelBotonH = new javax.swing.JPanel();
+        lblHistorial = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel4x4 = new javax.swing.JPanel();
         jPanel10x10 = new javax.swing.JPanel();
@@ -279,9 +281,7 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
         panelBoton.setLayout(panelBotonLayout);
         panelBotonLayout.setHorizontalGroup(
             panelBotonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelBotonLayout.createSequentialGroup()
-                .addComponent(lblCambiarTablero, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(lblCambiarTablero, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
         );
         panelBotonLayout.setVerticalGroup(
             panelBotonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -290,22 +290,22 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jPanel2.add(panelBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 620, 170, 50));
+        jPanel2.add(panelBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 620, 166, 50));
 
         btngTamaño.add(rbt15x15);
         rbt15x15.setForeground(new java.awt.Color(0, 0, 0));
         rbt15x15.setText("15x15");
-        jPanel2.add(rbt15x15, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 570, 60, -1));
+        jPanel2.add(rbt15x15, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 490, 60, -1));
 
         btngTamaño.add(rbt10x10);
         rbt10x10.setForeground(new java.awt.Color(0, 0, 0));
         rbt10x10.setText("10x10");
-        jPanel2.add(rbt10x10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 570, 70, -1));
+        jPanel2.add(rbt10x10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 490, 70, -1));
 
         btngTamaño.add(rbt13x13);
         rbt13x13.setForeground(new java.awt.Color(0, 0, 0));
         rbt13x13.setText("13x13");
-        jPanel2.add(rbt13x13, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 570, 80, -1));
+        jPanel2.add(rbt13x13, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 490, 80, -1));
 
         panelBoton3.setBackground(new java.awt.Color(140, 211, 179));
 
@@ -343,7 +343,45 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
         );
 
         jPanel2.add(panelBoton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, -1, 50));
-        jPanel2.add(lblDado, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 380, 120, 120));
+        jPanel2.add(lblDado, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 350, 120, 120));
+
+        panelBotonH.setBackground(new java.awt.Color(255, 250, 193));
+        panelBotonH.setPreferredSize(new java.awt.Dimension(166, 50));
+
+        lblHistorial.setBackground(new java.awt.Color(255, 255, 255));
+        lblHistorial.setFont(new java.awt.Font("Montserrat", 1, 20)); // NOI18N
+        lblHistorial.setForeground(new java.awt.Color(0, 0, 0));
+        lblHistorial.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblHistorial.setText("Historial");
+        lblHistorial.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblHistorial.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblHistorialMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblHistorialMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblHistorialMousePressed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelBotonHLayout = new javax.swing.GroupLayout(panelBotonH);
+        panelBotonH.setLayout(panelBotonHLayout);
+        panelBotonHLayout.setHorizontalGroup(
+            panelBotonHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBotonHLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lblHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        panelBotonHLayout.setVerticalGroup(
+            panelBotonHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBotonHLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lblHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        jPanel2.add(panelBotonH, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 560, -1, -1));
 
         panelFondo.add(jPanel2);
         jPanel2.setBounds(740, 10, 260, 750);
@@ -497,33 +535,6 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
         lblCierre.setForeground(new Color(0, 0, 0));
     }//GEN-LAST:event_lblCierreMouseExited
 
-    private void lblCambiarTableroMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCambiarTableroMouseEntered
-        panelBoton.setBackground(new Color(183, 221, 200));
-    }//GEN-LAST:event_lblCambiarTableroMouseEntered
-
-    private void lblCambiarTableroMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCambiarTableroMouseExited
-        panelBoton.setBackground(new Color(140, 211, 179));
-    }//GEN-LAST:event_lblCambiarTableroMouseExited
-
-    private void lblCambiarTableroMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCambiarTableroMousePressed
-        if (rbt10x10.isSelected()) {
-            jTabbedPane1.setSelectedIndex(0);
-            rbt10x10.setEnabled(false);
-            rbt13x13.setEnabled(true);
-            rbt15x15.setEnabled(true);
-        } else if (rbt13x13.isSelected()) {
-            jTabbedPane1.setSelectedIndex(1);
-            rbt10x10.setEnabled(true);
-            rbt13x13.setEnabled(false);
-            rbt15x15.setEnabled(true);
-        } else if (rbt15x15.isSelected()) {
-            jTabbedPane1.setSelectedIndex(2);
-            rbt10x10.setEnabled(true);
-            rbt13x13.setEnabled(true);
-            rbt15x15.setEnabled(false);
-        }
-    }//GEN-LAST:event_lblCambiarTableroMousePressed
-
     private void lblTerminarPartidaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTerminarPartidaMouseEntered
         panelBoton1.setBackground(new Color(204, 183, 153));
     }//GEN-LAST:event_lblTerminarPartidaMouseEntered
@@ -545,8 +556,8 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
     }//GEN-LAST:event_lblLanzarDadoMouseExited
 
     private void lblLanzarDadoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLanzarDadoMousePressed
-        Dado dado = new Dado(); 
-        final int resultado = dado.getValorDado(); 
+        Dado dado = new Dado();
+        final int resultado = dado.getValorDado();
         System.out.println(resultado);
 
         final Timer timer = new Timer(50, null);
@@ -587,6 +598,45 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
         });
     }//GEN-LAST:event_lblLanzarDadoMousePressed
 
+    private void lblCambiarTableroMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCambiarTableroMousePressed
+        if (rbt10x10.isSelected()) {
+            jTabbedPane1.setSelectedIndex(0);
+            rbt10x10.setEnabled(false);
+            rbt13x13.setEnabled(true);
+            rbt15x15.setEnabled(true);
+        } else if (rbt13x13.isSelected()) {
+            jTabbedPane1.setSelectedIndex(1);
+            rbt10x10.setEnabled(true);
+            rbt13x13.setEnabled(false);
+            rbt15x15.setEnabled(true);
+        } else if (rbt15x15.isSelected()) {
+            jTabbedPane1.setSelectedIndex(2);
+            rbt10x10.setEnabled(true);
+            rbt13x13.setEnabled(true);
+            rbt15x15.setEnabled(false);
+        }
+    }//GEN-LAST:event_lblCambiarTableroMousePressed
+
+    private void lblCambiarTableroMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCambiarTableroMouseExited
+        panelBoton.setBackground(new Color(140, 211, 179));
+    }//GEN-LAST:event_lblCambiarTableroMouseExited
+
+    private void lblCambiarTableroMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCambiarTableroMouseEntered
+        panelBoton.setBackground(new Color(183, 221, 200));
+    }//GEN-LAST:event_lblCambiarTableroMouseEntered
+
+    private void lblHistorialMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHistorialMouseEntered
+        panelBotonH.setBackground(new Color (255, 250, 212));
+    }//GEN-LAST:event_lblHistorialMouseEntered
+
+    private void lblHistorialMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHistorialMouseExited
+        panelBotonH.setBackground(new Color(255, 250, 193));
+    }//GEN-LAST:event_lblHistorialMouseExited
+
+    private void lblHistorialMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHistorialMousePressed
+
+    }//GEN-LAST:event_lblHistorialMousePressed
+
     public void moverJugadorActual(int resultado) {
         Jugador jugadorActual = jugadores.get(this.jugadorActual);
 
@@ -626,6 +676,7 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
     private javax.swing.JLabel lblCambiarTablero;
     private javax.swing.JLabel lblCierre;
     private javax.swing.JLabel lblDado;
+    private javax.swing.JLabel lblHistorial;
     private javax.swing.JLabel lblLanzarDado;
     private javax.swing.JLabel lblNombreJ1;
     private javax.swing.JLabel lblNombreJ2;
@@ -634,7 +685,9 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
     private javax.swing.JLabel lblTerminarPartida;
     private javax.swing.JPanel panelBoton;
     private javax.swing.JPanel panelBoton1;
+    private javax.swing.JPanel panelBoton2;
     private javax.swing.JPanel panelBoton3;
+    private javax.swing.JPanel panelBotonH;
     private javax.swing.JPanel panelFondo;
     private javax.swing.JRadioButton rbt10x10;
     private javax.swing.JRadioButton rbt13x13;
