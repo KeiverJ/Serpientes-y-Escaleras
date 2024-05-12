@@ -18,7 +18,6 @@ public class Jugador {
 
     private String nombre;
     private ImageIcon fichaIcon;
-    private Color color;
     private int id;
     private int position;
 
@@ -54,18 +53,6 @@ public class Jugador {
 
     public void setPosition(int position) {
         this.position = position;
-    }
-
-    public Color getColor() {
-        return color;
-    }
-
-    private Color getRandomColor() {
-        Random random = new Random();
-        float r = random.nextFloat();
-        float g = random.nextFloat();
-        float b = random.nextFloat();
-        return new Color(r, g, b);
     }
 
     public void configurarJugador(Jugador jugador, String nombre, ImageIcon fichaIcon, JLabel labelNombre) {

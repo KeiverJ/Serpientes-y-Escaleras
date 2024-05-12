@@ -2,6 +2,7 @@ package GUI;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -129,14 +130,17 @@ public class Tablero extends JPanel {
         }
 
         for (Jugador jugador : jugadores) {
-            int position = jugador.getPosition() - 1; 
-            int row = (rows - 1) - position / cols; 
-            int col = position % cols; 
-            int x = (int) (col * CELL_SIZE_X + CELL_SIZE_X / 4);
-            int y = (int) (row * CELL_SIZE_Y + CELL_SIZE_Y / 4);
+            ImageIcon icono = jugador.getFichaIcon();
+            if (icono != null) {
+                int position = jugador.getPosition() - 1;
+                int row = (rows - 1) - position / cols;
+                int col = position % cols;
+                int x = (int) (col * CELL_SIZE_X + CELL_SIZE_X / 4);
+                int y = (int) (row * CELL_SIZE_Y + CELL_SIZE_Y / 4);
 
-            g.setColor(jugador.getColor());
-            g.fillOval(x, y, CELL_SIZE / 2, CELL_SIZE / 2);
+                Image img = icono.getImage();
+                g.drawImage(img, x, y, CELL_SIZE / 2, CELL_SIZE / 2, null);
+            }
         }
     }
 

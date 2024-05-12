@@ -57,8 +57,8 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
         switch (tamañoTablero) {
             case 10:
                 jTabbedPane1.setSelectedIndex(0);
-                jPanel10x10.setLayout(new BorderLayout());
-                jPanel10x10.add(tablero10x10, BorderLayout.CENTER);
+                jPanel13x14.setLayout(new BorderLayout());
+                jPanel13x14.add(tablero10x10, BorderLayout.CENTER);
                 tablero10x10.revalidate();
                 tablero10x10.repaint();
                 rbt10x10.setEnabled(false);
@@ -131,7 +131,7 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
         lblLanzarDado = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel4x4 = new javax.swing.JPanel();
-        jPanel10x10 = new javax.swing.JPanel();
+        jPanel13x14 = new javax.swing.JPanel();
         jPanel5x5 = new javax.swing.JPanel();
         jPanel13x13 = new javax.swing.JPanel();
         jPanel3x3 = new javax.swing.JPanel();
@@ -326,25 +326,25 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
         jPanel2.add(panelBoton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, -1, 50));
 
         panelFondo.add(jPanel2);
-        jPanel2.setBounds(760, 10, 240, 750);
+        jPanel2.setBounds(740, 10, 260, 750);
 
         jTabbedPane1.setBackground(new java.awt.Color(240, 232, 216));
         jTabbedPane1.setTabPlacement(javax.swing.JTabbedPane.RIGHT);
 
         jPanel4x4.setBackground(new java.awt.Color(240, 232, 216));
 
-        jPanel10x10.setBackground(new java.awt.Color(162, 213, 242));
-        jPanel10x10.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel10x10.setPreferredSize(new java.awt.Dimension(220, 220));
+        jPanel13x14.setBackground(new java.awt.Color(162, 213, 242));
+        jPanel13x14.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel13x14.setPreferredSize(new java.awt.Dimension(220, 220));
 
-        javax.swing.GroupLayout jPanel10x10Layout = new javax.swing.GroupLayout(jPanel10x10);
-        jPanel10x10.setLayout(jPanel10x10Layout);
-        jPanel10x10Layout.setHorizontalGroup(
-            jPanel10x10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jPanel13x14Layout = new javax.swing.GroupLayout(jPanel13x14);
+        jPanel13x14.setLayout(jPanel13x14Layout);
+        jPanel13x14Layout.setHorizontalGroup(
+            jPanel13x14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 676, Short.MAX_VALUE)
         );
-        jPanel10x10Layout.setVerticalGroup(
-            jPanel10x10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanel13x14Layout.setVerticalGroup(
+            jPanel13x14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 676, Short.MAX_VALUE)
         );
 
@@ -354,14 +354,14 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
             jPanel4x4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4x4Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addComponent(jPanel10x10, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel13x14, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(32, Short.MAX_VALUE))
         );
         jPanel4x4Layout.setVerticalGroup(
             jPanel4x4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4x4Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addComponent(jPanel10x10, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel13x14, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(48, Short.MAX_VALUE))
         );
 
@@ -578,8 +578,8 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanel10x10;
     private javax.swing.JPanel jPanel13x13;
+    private javax.swing.JPanel jPanel13x14;
     private javax.swing.JPanel jPanel15x15;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3x3;

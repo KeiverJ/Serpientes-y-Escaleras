@@ -50,6 +50,7 @@ public class PanelMain_SerpientesyEscaleras extends javax.swing.JFrame {
     private void initComponents() {
 
         rbtTamañoTablero = new javax.swing.ButtonGroup();
+        rbtJugadores = new javax.swing.ButtonGroup();
         panelFondo = new modelo.PanelRedondeado();
         lblCierre = new javax.swing.JLabel();
         lblTamaño = new javax.swing.JLabel();
@@ -112,7 +113,6 @@ public class PanelMain_SerpientesyEscaleras extends javax.swing.JFrame {
         txtJugador2.setFont(new java.awt.Font("Montserrat", 1, 28)); // NOI18N
         txtJugador2.setForeground(new java.awt.Color(0, 0, 0));
         txtJugador2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtJugador2.setText("Jugador 2");
         txtJugador2.setBorder(null);
         txtJugador2.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -142,7 +142,6 @@ public class PanelMain_SerpientesyEscaleras extends javax.swing.JFrame {
         txtJugador1.setFont(new java.awt.Font("Montserrat", 1, 28)); // NOI18N
         txtJugador1.setForeground(new java.awt.Color(0, 0, 0));
         txtJugador1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtJugador1.setText("Jugador 1");
         txtJugador1.setBorder(null);
         txtJugador1.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -197,7 +196,6 @@ public class PanelMain_SerpientesyEscaleras extends javax.swing.JFrame {
         txtJugador3.setFont(new java.awt.Font("Montserrat", 1, 28)); // NOI18N
         txtJugador3.setForeground(new java.awt.Color(0, 0, 0));
         txtJugador3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtJugador3.setText("Jugador 3");
         txtJugador3.setBorder(null);
         txtJugador3.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -227,7 +225,6 @@ public class PanelMain_SerpientesyEscaleras extends javax.swing.JFrame {
         txtJugador4.setFont(new java.awt.Font("Montserrat", 1, 28)); // NOI18N
         txtJugador4.setForeground(new java.awt.Color(0, 0, 0));
         txtJugador4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtJugador4.setText("Jugador 4");
         txtJugador4.setBorder(null);
         txtJugador4.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -277,19 +274,19 @@ public class PanelMain_SerpientesyEscaleras extends javax.swing.JFrame {
         panelBoton.setLayout(panelBotonLayout);
         panelBotonLayout.setHorizontalGroup(
             panelBotonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelBotonLayout.createSequentialGroup()
-                .addComponent(lblInicar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBotonLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lblInicar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         panelBotonLayout.setVerticalGroup(
             panelBotonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelBotonLayout.createSequentialGroup()
-                .addComponent(lblInicar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBotonLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lblInicar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         panelFondo.add(panelBoton);
-        panelBoton.setBounds(440, 280, 160, 50);
+        panelBoton.setBounds(440, 270, 160, 50);
 
         lblTamaño1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblTamaño1.setForeground(new java.awt.Color(0, 0, 0));
@@ -360,25 +357,33 @@ public class PanelMain_SerpientesyEscaleras extends javax.swing.JFrame {
         Jugador jugador4 = new Jugador();
 
         if (txtJugador1.getText().equals("")) {
-            jugador1.setNombre("Jugador 1");
+            if (txtJugador1.hasFocus()) {
+                txtJugador1.setText("");
+            } else {
+                jugador1.setNombre("");
+            }
         } else {
             jugador1.setNombre(txtJugador1.getText());
         }
 
         if (txtJugador2.getText().equals("")) {
-            jugador2.setNombre("Jugador 2");
+            if (txtJugador2.hasFocus()) {
+                txtJugador2.setText("");
+            } else {
+                jugador2.setNombre("");
+            }
         } else {
             jugador2.setNombre(txtJugador2.getText());
         }
 
         if (txtJugador3.getText().equals("")) {
-            jugador3.setNombre("Jugador 3");
+            jugador3.setNombre("");
         } else {
             jugador3.setNombre(txtJugador3.getText());
         }
 
         if (txtJugador4.getText().equals("")) {
-            jugador4.setNombre("Jugador 4");
+            jugador4.setNombre("");
         } else {
             jugador4.setNombre(txtJugador4.getText());
         }
@@ -440,13 +445,15 @@ public class PanelMain_SerpientesyEscaleras extends javax.swing.JFrame {
     }//GEN-LAST:event_txtJugador1MouseEntered
 
     private void txtJugador1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtJugador1FocusLost
-        if (txtJugador1.getText().equals(""))
-            txtJugador1.setText("Jugador 1");
+        if (txtJugador1.getText().trim().equals("")) {
+            txtJugador1.setText("");
+        }
     }//GEN-LAST:event_txtJugador1FocusLost
 
     private void txtJugador1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtJugador1FocusGained
-        if (txtJugador1.getText().equals("Jugador 1"))
+        if (txtJugador1.getText().equals("Jugador 1")) {
             txtJugador1.setText("");
+        }
     }//GEN-LAST:event_txtJugador1FocusGained
 
     private void txtJugador2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtJugador2KeyTyped
@@ -466,13 +473,15 @@ public class PanelMain_SerpientesyEscaleras extends javax.swing.JFrame {
     }//GEN-LAST:event_txtJugador2MouseEntered
 
     private void txtJugador2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtJugador2FocusLost
-        if (txtJugador2.getText().equals(""))
-            txtJugador2.setText("Jugador 2");
+        if (txtJugador2.getText().trim().equals("")) {
+            txtJugador2.setText("");
+        }
     }//GEN-LAST:event_txtJugador2FocusLost
 
     private void txtJugador2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtJugador2FocusGained
-        if (txtJugador2.getText().equals("Jugador 2"))
+        if (txtJugador2.getText().equals("Jugador 2")) {
             txtJugador2.setText("");
+        }
     }//GEN-LAST:event_txtJugador2FocusGained
 
     private void lblCierreMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCierreMouseExited
@@ -487,13 +496,10 @@ public class PanelMain_SerpientesyEscaleras extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_lblCierreMouseClicked
 
-    private void txtJugador3FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtJugador3FocusGained
-        if (txtJugador3.getText().equals("Jugador 3"))
-            txtJugador3.setText("");    }//GEN-LAST:event_txtJugador3FocusGained
-
     private void txtJugador3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtJugador3FocusLost
-        if (txtJugador3.getText().equals(""))
-            txtJugador3.setText("Jugador 3");
+        if (txtJugador3.getText().trim().equals("")) {
+            txtJugador3.setText("");
+        }
     }//GEN-LAST:event_txtJugador3FocusLost
 
     private void txtJugador3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtJugador3MouseEntered
@@ -513,13 +519,15 @@ public class PanelMain_SerpientesyEscaleras extends javax.swing.JFrame {
     }//GEN-LAST:event_txtJugador3KeyTyped
 
     private void txtJugador4FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtJugador4FocusGained
-        if (txtJugador4.getText().equals("Jugador 4"))
+        if (txtJugador4.getText().equals("Jugador 4")) {
             txtJugador4.setText("");
+        }
     }//GEN-LAST:event_txtJugador4FocusGained
 
     private void txtJugador4FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtJugador4FocusLost
-        if (txtJugador4.getText().equals(""))
-            txtJugador4.setText("Jugador 4");
+        if (txtJugador4.getText().trim().equals("")) {
+            txtJugador4.setText("");
+        }
     }//GEN-LAST:event_txtJugador4FocusLost
 
     private void txtJugador4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtJugador4MouseEntered
@@ -537,6 +545,12 @@ public class PanelMain_SerpientesyEscaleras extends javax.swing.JFrame {
         if (txtJugador4.getText().length() >= 10)
             evt.consume();
     }//GEN-LAST:event_txtJugador4KeyTyped
+
+    private void txtJugador3FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtJugador3FocusGained
+        if (txtJugador3.getText().equals("Jugador 3")) {
+            txtJugador3.setText("");
+        }
+    }//GEN-LAST:event_txtJugador3FocusGained
 
     /**
      * @param args the command line arguments
@@ -592,6 +606,7 @@ public class PanelMain_SerpientesyEscaleras extends javax.swing.JFrame {
     private javax.swing.JRadioButton rbt10x10;
     private javax.swing.JRadioButton rbt13x13;
     private javax.swing.JRadioButton rbt15x15;
+    private javax.swing.ButtonGroup rbtJugadores;
     private javax.swing.ButtonGroup rbtTamañoTablero;
     private javax.swing.JTextField txtJugador1;
     private javax.swing.JTextField txtJugador2;
