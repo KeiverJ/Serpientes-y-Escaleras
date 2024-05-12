@@ -3,9 +3,12 @@ package GUI;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Random;
 import javax.swing.ImageIcon;
+import javax.swing.Timer;
 
 /**
  *
@@ -17,6 +20,7 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
     private int jugadorActual;
     private int numSerpientes;
     private int numEscaleras;
+    private int jugadorActualIndex = 0;
 
     int tamañoTableroActual;
 
@@ -55,7 +59,7 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
     }
 
     private void init(int tamañoTablero, int numEscaleras, int numSerpientes) {
-        String ubicaciones; // Declarar la variable fuera del switch
+        String ubicaciones;
 
         switch (tamañoTablero) {
             case 10:
@@ -541,9 +545,49 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
     }//GEN-LAST:event_lblLanzarDadoMouseExited
 
     private void lblLanzarDadoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLanzarDadoMousePressed
-        int resultado = Dado.lanzar();
+        final int resultado = Dado.lanzar();
         System.out.println(resultado);
 
+        final Timer timer = new Timer(50, null);
+        timer.start();
+
+        final long tiempoInicio = System.currentTimeMillis();
+        timer.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                long tiempoTranscurrido = System.currentTimeMillis() - tiempoInicio;
+                if (tiempoTranscurrido < 1000) {
+                    int valorAleatorio = new Random().nextInt(6) + 1;
+                    ImageIcon iconoAleatorio = Dado.obtenerImagenDadoRedimensionada(valorAleatorio, 120, 120);
+                    lblDado.setIcon(iconoAleatorio);
+                } else {
+                    timer.stop();
+                    ImageIcon iconoResultado = Dado.obtenerImagenDadoRedimensionada(resultado, 120, 120);
+                    lblDado.setIcon(iconoResultado);
+
+                    Jugador jugadorActual = jugadores.get(jugadorActualIndex);
+
+                    switch (tamañoTableroActual) {
+                        case 10:
+                            tablero10x10.moverJugador(jugadorActual, resultado);
+                            break;
+                        case 13:
+                            tablero13x13.moverJugador(jugadorActual, resultado);
+                            break;
+                        case 15:
+                            tablero15x15.moverJugador(jugadorActual, resultado);
+                            break;
+                        default:
+                            break;
+                    }
+
+                    jugadorActualIndex = (jugadorActualIndex + 1) % jugadores.size();
+                }
+            }
+        });
+    }//GEN-LAST:event_lblLanzarDadoMousePressed
+
+    public void moverJugadorActual(int resultado) {
         Jugador jugadorActual = jugadores.get(this.jugadorActual);
 
         switch (tamañoTableroActual) {
@@ -562,11 +606,7 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
             default:
                 break;
         }
-
-        ImageIcon iconoRedimensionado = Dado.obtenerImagenDadoRedimensionada(resultado, 120, 120);
-        lblDado.setIcon(iconoRedimensionado);
-    }//GEN-LAST:event_lblLanzarDadoMousePressed
-
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup btngTamaño;
