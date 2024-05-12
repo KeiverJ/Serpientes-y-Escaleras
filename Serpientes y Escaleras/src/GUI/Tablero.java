@@ -243,7 +243,9 @@ public class Tablero extends JPanel {
 
         repaint();
     }
+    
 
+    
     private boolean isSerpienteInicio(int pos) {
         return contains(serpientesInicio, pos);
     }

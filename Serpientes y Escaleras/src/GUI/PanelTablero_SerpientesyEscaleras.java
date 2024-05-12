@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Random;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
 /**
@@ -113,11 +114,6 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
             default:
                 break;
         }
-    }
-
-    private int dado() {
-        Random random = new Random();
-        return random.nextInt(6) + 1;
     }
 
     @SuppressWarnings("unchecked")
@@ -599,21 +595,29 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
     }//GEN-LAST:event_lblLanzarDadoMousePressed
 
     private void lblCambiarTableroMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCambiarTableroMousePressed
-        if (rbt10x10.isSelected()) {
-            jTabbedPane1.setSelectedIndex(0);
-            rbt10x10.setEnabled(false);
-            rbt13x13.setEnabled(true);
-            rbt15x15.setEnabled(true);
-        } else if (rbt13x13.isSelected()) {
-            jTabbedPane1.setSelectedIndex(1);
-            rbt10x10.setEnabled(true);
-            rbt13x13.setEnabled(false);
-            rbt15x15.setEnabled(true);
-        } else if (rbt15x15.isSelected()) {
-            jTabbedPane1.setSelectedIndex(2);
-            rbt10x10.setEnabled(true);
-            rbt13x13.setEnabled(true);
-            rbt15x15.setEnabled(false);
+        String inputSerpientes = JOptionPane.showInputDialog(this, "Ingrese la cantidad de serpientes");
+        if (inputSerpientes != null && !inputSerpientes.isEmpty()) {
+            try {
+                int numSerpientes = Integer.parseInt(inputSerpientes);
+                String inputEscaleras = JOptionPane.showInputDialog(this, "Ingrese la cantidad de escaleras");
+                if (inputEscaleras != null && !inputEscaleras.isEmpty()) {
+                    try {
+                        int numEscaleras = Integer.parseInt(inputEscaleras);
+                        limpiarTablero();
+                        if (rbt10x10.isSelected()) {
+                            init(10, numEscaleras, numSerpientes);
+                        } else if (rbt13x13.isSelected()) {
+                            init(13, numEscaleras, numSerpientes);
+                        } else if (rbt15x15.isSelected()) {
+                            init(15, numEscaleras, numSerpientes);
+                        }
+                    } catch (NumberFormatException e) {
+                        JOptionPane.showMessageDialog(this, "Entrada inválida para escaleras. Por favor, ingrese un número entero.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Entrada inválida para serpientes. Por favor, ingrese un número entero.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }//GEN-LAST:event_lblCambiarTableroMousePressed
 
@@ -626,7 +630,7 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
     }//GEN-LAST:event_lblCambiarTableroMouseEntered
 
     private void lblHistorialMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHistorialMouseEntered
-        panelBotonH.setBackground(new Color (255, 250, 212));
+        panelBotonH.setBackground(new Color(255, 250, 212));
     }//GEN-LAST:event_lblHistorialMouseEntered
 
     private void lblHistorialMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHistorialMouseExited
@@ -657,6 +661,32 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
                 break;
         }
     }
+
+    private void limpiarTablero() {
+        switch (tamañoTableroActual) {
+            case 10:
+                for (Jugador jugador : jugadores) {
+                    tablero10x10.removerJugador(jugador);
+                }
+                jPanel10x10.removeAll();
+                break;
+            case 13:
+                for (Jugador jugador : jugadores) {
+                    tablero13x13.removerJugador(jugador);
+                }
+                jPanel13x13.removeAll();
+                break;
+            case 15:
+                for (Jugador jugador : jugadores) {
+                    tablero15x15.removerJugador(jugador);
+                }
+                jPanel15x15.removeAll();
+                break;
+            default:
+                break;
+        }
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup btngTamaño;
