@@ -212,7 +212,7 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
         lblNombreJ2.setForeground(new java.awt.Color(255, 170, 92));
         lblNombreJ2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblNombreJ2.setText("NAME");
-        jPanel2.add(lblNombreJ2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, 130, 40));
+        jPanel2.add(lblNombreJ2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, 90, 40));
 
         lblNombreJ3.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         lblNombreJ3.setForeground(new java.awt.Color(255, 170, 92));
@@ -226,18 +226,18 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
         lblNombreJ4.setText("NAME");
         jPanel2.add(lblNombreJ4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, 120, 40));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/ficha4.png"))); // NOI18N
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 160, 30, 50));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/ficha4Tablero.png"))); // NOI18N
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 150, 60, 70));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/ficha1.png"))); // NOI18N
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 50, 30, 50));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/ficha1Tablero.png"))); // NOI18N
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 60, 70));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/ficha2.png"))); // NOI18N
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 50, 30, 50));
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/ficha2Tablero.png"))); // NOI18N
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 60, 70));
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/ficha3.png"))); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/ficha3Tablero.png"))); // NOI18N
         jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 160, 30, 50));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 60, 70));
 
         panelBoton1.setBackground(new java.awt.Color(216, 195, 165));
 
@@ -705,7 +705,6 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
     private javax.swing.JLabel lblTerminarPartida;
     private javax.swing.JPanel panelBoton;
     private javax.swing.JPanel panelBoton1;
-    private javax.swing.JPanel panelBoton2;
     private javax.swing.JPanel panelBoton3;
     private javax.swing.JPanel panelBotonH;
     private javax.swing.JPanel panelFondo;
