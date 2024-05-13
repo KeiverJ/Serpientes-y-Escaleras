@@ -425,7 +425,7 @@ public class Tablero extends JPanel {
         } else if (isEscaleraInicio(nuevaPos)) {
             int escaleraFin = getEscaleraFin(nuevaPos);
             nuevaPos = escaleraFin;
-            EventoJuego evento = new EventoJuego("se movió de la posición " + viejaPos + " a la posición " + destino + " y " + "encontró una escalera y avanzó a la posición " + nuevaPos, jugador.getNombre(), viejaPos, nuevaPos);
+            EventoJuego evento = new EventoJuego("se movió de la posición " + viejaPos + " a la posición " + destino + ", " + "encontró una escalera y avanzó a la posición " + nuevaPos, jugador.getNombre(), viejaPos, nuevaPos);
             eventosJuego.add(evento);
             JOptionPane.showMessageDialog(this, "El jugador " + jugador.getNombre() + " se encontró con una escalera y avanzó desde la posición " + destino + " hasta la posición " + nuevaPos + ".", "Escalera", JOptionPane.INFORMATION_MESSAGE);
         } else {

@@ -65,26 +65,14 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
 
     }
 
-    private void mostrarRegistroEventos() {
-        StringBuilder sb = new StringBuilder();
-        List<EventoJuego> eventosJuego = tableroActual.getEventosJuego();
-        for (EventoJuego evento : eventosJuego) {
-            sb.append(evento.getDescripcion()).append("\n");
-        }
-        txtRegistroEventos.setText(sb.toString());
-    }
-
     private void init(int tamañoTablero, int numEscaleras, int numSerpientes) {
         String ubicaciones;
 
         switch (tamañoTablero) {
             case 10:
                 jTabbedPane1.setSelectedIndex(0);
-                if (tablero13x13 != null) {
-                    tablero13x13.limpiarImagenesSerpientesYEscaleras(jPanel13x13);
-                }
-                if (tablero15x15 != null) {
-                    tablero15x15.limpiarImagenesSerpientesYEscaleras(jPanel15x15);
+                if (tablero10x10 != null) {
+                    tablero10x10.limpiarImagenesSerpientesYEscaleras(jPanel10x10);
                 }
                 jPanel10x10.setLayout(new BorderLayout());
                 tablero10x10 = new Tablero(10, 10, jugadores, numEscaleras, numSerpientes);
@@ -101,14 +89,12 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
                 tableroActual = tablero10x10;
                 ubicaciones = tablero10x10.obtenerUbicacionesSerpientesYEscaleras();
                 txtASerpientesyEscaleras.setText(ubicaciones);
+                tamañoTableroActual = 10;
                 break;
             case 13:
                 jTabbedPane1.setSelectedIndex(1);
-                if (tablero10x10 != null) {
-                    tablero10x10.limpiarImagenesSerpientesYEscaleras(jPanel10x10);
-                }
-                if (tablero15x15 != null) {
-                    tablero15x15.limpiarImagenesSerpientesYEscaleras(jPanel15x15);
+                if (tablero13x13 != null) {
+                    tablero13x13.limpiarImagenesSerpientesYEscaleras(jPanel13x13);
                 }
                 jPanel13x13.setLayout(new BorderLayout());
                 tablero13x13 = new Tablero(13, 13, jugadores, numEscaleras, numSerpientes);
@@ -125,14 +111,12 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
                 tableroActual = tablero13x13;
                 ubicaciones = tablero13x13.obtenerUbicacionesSerpientesYEscaleras();
                 txtASerpientesyEscaleras.setText(ubicaciones);
+                tamañoTableroActual = 13;
                 break;
             case 15:
                 jTabbedPane1.setSelectedIndex(2);
-                if (tablero10x10 != null) {
-                    tablero10x10.limpiarImagenesSerpientesYEscaleras(jPanel10x10);
-                }
-                if (tablero13x13 != null) {
-                    tablero13x13.limpiarImagenesSerpientesYEscaleras(jPanel13x13);
+                if (tablero15x15 != null) {
+                    tablero15x15.limpiarImagenesSerpientesYEscaleras(jPanel15x15);
                 }
                 jPanel15x15.setLayout(new BorderLayout());
                 tablero15x15 = new Tablero(15, 15, jugadores, numEscaleras, numSerpientes);
@@ -149,6 +133,7 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
                 tableroActual = tablero15x15;
                 ubicaciones = tablero15x15.obtenerUbicacionesSerpientesYEscaleras();
                 txtASerpientesyEscaleras.setText(ubicaciones);
+                tamañoTableroActual = 15;
                 break;
             default:
                 break;
@@ -183,6 +168,8 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
         lblDado = new javax.swing.JLabel();
         panelBotonH = new javax.swing.JPanel();
         lblHistorial = new javax.swing.JLabel();
+        jpanelReiniciar = new javax.swing.JPanel();
+        lblReiniciar = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel4x4 = new javax.swing.JPanel();
         jPanel10x10 = new javax.swing.JPanel();
@@ -290,7 +277,7 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
                 .addComponent(lblTerminarPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPanel2.add(panelBoton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 680, -1, 50));
+        jPanel2.add(panelBoton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 630, 166, 50));
 
         panelBoton.setBackground(new java.awt.Color(140, 211, 179));
 
@@ -325,22 +312,22 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jPanel2.add(panelBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 620, 166, 50));
+        jPanel2.add(panelBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 570, 166, 50));
 
         btngTamaño.add(rbt15x15);
         rbt15x15.setForeground(new java.awt.Color(0, 0, 0));
         rbt15x15.setText("15x15");
-        jPanel2.add(rbt15x15, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 490, 60, -1));
+        jPanel2.add(rbt15x15, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 480, 60, -1));
 
         btngTamaño.add(rbt10x10);
         rbt10x10.setForeground(new java.awt.Color(0, 0, 0));
         rbt10x10.setText("10x10");
-        jPanel2.add(rbt10x10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 490, 70, -1));
+        jPanel2.add(rbt10x10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 480, 70, -1));
 
         btngTamaño.add(rbt13x13);
         rbt13x13.setForeground(new java.awt.Color(0, 0, 0));
         rbt13x13.setText("13x13");
-        jPanel2.add(rbt13x13, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 490, 80, -1));
+        jPanel2.add(rbt13x13, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 480, 80, -1));
 
         panelBoton3.setBackground(new java.awt.Color(140, 211, 179));
 
@@ -416,7 +403,45 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
                 .addComponent(lblHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPanel2.add(panelBotonH, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 560, -1, -1));
+        jPanel2.add(panelBotonH, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 510, -1, -1));
+
+        jpanelReiniciar.setBackground(new java.awt.Color(177, 156, 217));
+
+        lblReiniciar.setBackground(new java.awt.Color(255, 255, 255));
+        lblReiniciar.setFont(new java.awt.Font("Montserrat", 1, 20)); // NOI18N
+        lblReiniciar.setForeground(new java.awt.Color(0, 0, 0));
+        lblReiniciar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblReiniciar.setText("Reiniciar partida");
+        lblReiniciar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblReiniciar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblReiniciarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblReiniciarMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblReiniciarMousePressed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jpanelReiniciarLayout = new javax.swing.GroupLayout(jpanelReiniciar);
+        jpanelReiniciar.setLayout(jpanelReiniciarLayout);
+        jpanelReiniciarLayout.setHorizontalGroup(
+            jpanelReiniciarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpanelReiniciarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblReiniciar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jpanelReiniciarLayout.setVerticalGroup(
+            jpanelReiniciarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpanelReiniciarLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lblReiniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        jPanel2.add(jpanelReiniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 690, 166, 50));
 
         panelFondo.add(jPanel2);
         jPanel2.setBounds(740, 10, 260, 750);
@@ -553,7 +578,7 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelFondo, javax.swing.GroupLayout.DEFAULT_SIZE, 771, Short.MAX_VALUE)
+            .addComponent(panelFondo, javax.swing.GroupLayout.DEFAULT_SIZE, 788, Short.MAX_VALUE)
         );
 
         pack();
@@ -580,7 +605,9 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
     }//GEN-LAST:event_lblTerminarPartidaMouseExited
 
     private void lblTerminarPartidaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTerminarPartidaMousePressed
-        System.exit(0);
+        PanelMain_SerpientesyEscaleras main = new PanelMain_SerpientesyEscaleras();
+        main.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_lblTerminarPartidaMousePressed
 
     private void lblLanzarDadoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLanzarDadoMouseEntered
@@ -669,9 +696,56 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
 
     private void lblHistorialMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHistorialMousePressed
         List<EventoJuego> eventosJuego = tableroActual.getEventosJuego();
-        RegistroEventosDialog dialog = new RegistroEventosDialog(this, eventosJuego);
-        dialog.setVisible(true);
+        RegistroEventosDialog historial = new RegistroEventosDialog(this, eventosJuego);
+        historial.setVisible(true);
     }//GEN-LAST:event_lblHistorialMousePressed
+
+    private void lblReiniciarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblReiniciarMouseEntered
+        jpanelReiniciar.setBackground(new Color(214, 176, 255));
+    }//GEN-LAST:event_lblReiniciarMouseEntered
+
+    private void lblReiniciarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblReiniciarMouseExited
+        jpanelReiniciar.setBackground(new Color(177, 156, 217));
+    }//GEN-LAST:event_lblReiniciarMouseExited
+
+    private void lblReiniciarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblReiniciarMousePressed
+        String inputSerpientes = JOptionPane.showInputDialog(this, "Ingrese la cantidad de serpientes");
+        if (inputSerpientes != null && !inputSerpientes.isEmpty()) {
+            try {
+                int numSerpientes = Integer.parseInt(inputSerpientes);
+                String inputEscaleras = JOptionPane.showInputDialog(this, "Ingrese la cantidad de escaleras");
+                if (inputEscaleras != null && !inputEscaleras.isEmpty()) {
+                    try {
+                        int numEscaleras = Integer.parseInt(inputEscaleras);
+                        if (tableroActual != null) {
+                            tableroActual.limpiarTablero();
+                        }
+
+                        switch (tamañoTableroActual) {
+                            case 10:
+                                init(10, numEscaleras, numSerpientes);
+                                tablero10x10.reiniciarPosicionJugadores();
+                                break;
+                            case 13:
+                                init(13, numEscaleras, numSerpientes);
+                                tablero13x13.reiniciarPosicionJugadores();
+                                break;
+                            case 15:
+                                init(15, numEscaleras, numSerpientes);
+                                tablero15x15.reiniciarPosicionJugadores();
+                                break;
+                            default:
+                                break;
+                        }
+                    } catch (NumberFormatException e) {
+                        JOptionPane.showMessageDialog(this, "Entrada inválida para escaleras. Por favor, ingrese un número entero.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Entrada inválida para serpientes. Por favor, ingrese un número entero.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_lblReiniciarMousePressed
 
     public void moverJugadorActual(int resultado) {
         Jugador jugadorActual = jugadores.get(this.jugadorActual);
@@ -710,6 +784,7 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5x5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JPanel jpanelReiniciar;
     private javax.swing.JLabel lblCambiarTablero;
     private javax.swing.JLabel lblCierre;
     private javax.swing.JLabel lblDado;
@@ -719,6 +794,7 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
     private javax.swing.JLabel lblNombreJ2;
     private javax.swing.JLabel lblNombreJ3;
     private javax.swing.JLabel lblNombreJ4;
+    private javax.swing.JLabel lblReiniciar;
     private javax.swing.JLabel lblTerminarPartida;
     private javax.swing.JPanel panelBoton;
     private javax.swing.JPanel panelBoton1;
