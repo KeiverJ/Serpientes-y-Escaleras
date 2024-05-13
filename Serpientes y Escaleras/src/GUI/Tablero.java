@@ -22,8 +22,8 @@ public class Tablero extends JPanel {
 
     ImageIcon serpienteInicioIcon = new ImageIcon(getClass().getResource("/resources/serpienteinicio.png"));
     ImageIcon serpienteFinIcon = new ImageIcon(getClass().getResource("/resources/serpientefin.png"));
-    ImageIcon escaleraInicioIcon = new ImageIcon(getClass().getResource("/resources/escalera.png"));
-    ImageIcon escaleraFinIcon = new ImageIcon(getClass().getResource("/resources/escalera.png"));
+    ImageIcon escaleraInicioIcon = new ImageIcon(getClass().getResource("/resources/escalerainicio.png"));
+    ImageIcon escaleraFinIcon = new ImageIcon(getClass().getResource("/resources/escalerafin.png"));
 
     private static final int CELL_SIZE = 55;
     private final int rows;
@@ -188,6 +188,7 @@ public class Tablero extends JPanel {
                 x = (int) (((cols - col - 1) * CELL_SIZE_X) + (CELL_SIZE_X / 4));
                 y = (int) (((rows - row - 1) * CELL_SIZE_Y) + (CELL_SIZE_Y / 4));
             }
+
             g.drawImage(serpienteInicioIcon.getImage(), x, y, (int) (CELL_SIZE_X / 2), (int) (CELL_SIZE_Y / 2), this);
         }
 
@@ -203,6 +204,7 @@ public class Tablero extends JPanel {
                 x = (int) (((cols - col - 1) * CELL_SIZE_X) + (CELL_SIZE_X / 4));
                 y = (int) (((rows - row - 1) * CELL_SIZE_Y) + (CELL_SIZE_Y / 4));
             }
+
             g.drawImage(serpienteFinIcon.getImage(), x, y, (int) iconSize, (int) iconSize, this);
         }
 
@@ -218,6 +220,7 @@ public class Tablero extends JPanel {
                 x = (int) (((cols - col - 1) * CELL_SIZE_X) + (CELL_SIZE_X / 4));
                 y = (int) (((rows - row - 1) * CELL_SIZE_Y) + (CELL_SIZE_Y / 4));
             }
+
             g.drawImage(escaleraInicioIcon.getImage(), x, y, (int) (CELL_SIZE_X / 2), (int) (CELL_SIZE_Y / 2), this);
         }
 
@@ -233,6 +236,7 @@ public class Tablero extends JPanel {
                 x = (int) (((cols - col - 1) * CELL_SIZE_X) + (CELL_SIZE_X / 4));
                 y = (int) (((rows - row - 1) * CELL_SIZE_Y) + (CELL_SIZE_Y / 4));
             }
+
             g.drawImage(escaleraFinIcon.getImage(), x, y, (int) (CELL_SIZE_X / 2), (int) (CELL_SIZE_Y / 2), this);
         }
     }
@@ -242,7 +246,6 @@ public class Tablero extends JPanel {
         int panelHeight = getHeight();
         double CELL_SIZE_X = (double) panelWidth / cols;
         double CELL_SIZE_Y = (double) panelHeight / rows;
-
         g.setColor(Color.GRAY);
         g.fillRect(0, 0, panelWidth, panelHeight);
 
@@ -277,6 +280,16 @@ public class Tablero extends JPanel {
                         if (cellValue == escalerasFin[i]) {
                             isEscaleraEnd = true;
                         }
+                    }
+
+                    if (isSerpienteStart && isSerpienteEnd) {
+                        cellColor = new Color(220, 220, 255);
+                    } else if (isEscaleraStart && isEscaleraEnd) {
+                        cellColor = new Color(255, 245, 220);
+                    } else if (isSerpienteStart || isSerpienteEnd) {
+                        cellColor = new Color(220, 220, 255);
+                    } else if (isEscaleraStart || isEscaleraEnd) {
+                        cellColor = new Color(255, 245, 220);
                     }
 
                     g.setColor(cellColor);
@@ -321,6 +334,16 @@ public class Tablero extends JPanel {
                         if (cellValue == escalerasFin[i]) {
                             isEscaleraEnd = true;
                         }
+                    }
+
+                    if (isSerpienteStart && isSerpienteEnd) {
+                        cellColor = new Color(220, 220, 255);
+                    } else if (isEscaleraStart && isEscaleraEnd) {
+                        cellColor = new Color(255, 245, 220);
+                    } else if (isSerpienteStart || isSerpienteEnd) {
+                        cellColor = new Color(220, 220, 255);
+                    } else if (isEscaleraStart || isEscaleraEnd) {
+                        cellColor = new Color(255, 245, 220);
                     }
 
                     g.setColor(cellColor);
