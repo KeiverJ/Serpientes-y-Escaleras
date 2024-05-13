@@ -28,6 +28,8 @@ public class RegistroEventosDialog extends JDialog {
         txtRegistroEventos.setEditable(false);
         txtRegistroEventos.setBackground(new Color(240, 232, 216));
         txtRegistroEventos.setOpaque(true);
+        txtRegistroEventos.setLineWrap(true);
+        txtRegistroEventos.setWrapStyleWord(true);
 
         StringBuilder sb = new StringBuilder();
         for (EventoJuego evento : eventosJuego) {

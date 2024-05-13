@@ -61,53 +61,74 @@ public class Tablero extends JPanel {
         repaint();
     }
 
+    public void limpiarImagenesSerpientesYEscaleras(JPanel panelTablero) {
+        panelTablero.removeAll();
+        panelTablero.revalidate();
+        panelTablero.repaint();
+    }
+
     private void configurarSerpientesYEscaleras(int numEscaleras, int numSerpientes) {
-        if (numEscaleras <= 0 || numSerpientes <= 0) {
-            System.err.println("El número de escaleras y serpientes debe ser positivo.");
-            return;
-        }
+        boolean generacionExitosa = false;
+        int maxIntentos = 10;
+        int intentosRealizados = 0;
 
-        Random random = new Random();
-        int totalCasillas = rows * cols;
-        int cantidadUbicaciones = numEscaleras + numSerpientes;
-
-        if (totalCasillas < cantidadUbicaciones) {
-            System.err.println("La cantidad de serpientes y escaleras excede el tamaño del tablero.");
-            return;
-        }
-
-        serpientesInicio = new int[numSerpientes];
-        serpientesFin = new int[numSerpientes];
-        escalerasInicio = new int[numEscaleras];
-        escalerasFin = new int[numEscaleras];
-
-        List<Integer> casillasPosibles = new ArrayList<>();
-        for (int i = 2; i < totalCasillas; i++) {
-            casillasPosibles.add(i);
-        }
-
-        int maxIntentos = 100;
-
-        for (int i = 0; i < numSerpientes; i++) {
-            int inicioSerpiente = ubicarUbicacion(random, casillasPosibles);
-            serpientesInicio[i] = inicioSerpiente;
-            int finSerpiente = generarUbicacionFinalSerpiente(random, inicioSerpiente, casillasPosibles, maxIntentos);
-            if (finSerpiente == -1) {
-                System.err.println("No se pudo ubicar todas las serpientes y escaleras en el tablero.");
+        while (!generacionExitosa && intentosRealizados < maxIntentos) {
+            if (numEscaleras <= 0 || numSerpientes <= 0) {
+                System.err.println("El número de escaleras y serpientes debe ser positivo.");
                 return;
             }
-            serpientesFin[i] = finSerpiente;
-        }
 
-        for (int i = 0; i < numEscaleras; i++) {
-            int inicioEscalera = ubicarUbicacion(random, casillasPosibles);
-            escalerasInicio[i] = inicioEscalera;
-            int finEscalera = generarUbicacionFinalEscalera(random, inicioEscalera, casillasPosibles, maxIntentos);
-            if (finEscalera == -1) {
-                System.err.println("No se pudo ubicar todas las serpientes y escaleras en el tablero.");
+            Random random = new Random();
+            int totalCasillas = rows * cols;
+            int cantidadUbicaciones = numEscaleras + numSerpientes;
+
+            if (totalCasillas < cantidadUbicaciones) {
+                System.err.println("La cantidad de serpientes y escaleras excede el tamaño del tablero.");
                 return;
             }
-            escalerasFin[i] = finEscalera;
+
+            serpientesInicio = new int[numSerpientes];
+            serpientesFin = new int[numSerpientes];
+            escalerasInicio = new int[numEscaleras];
+            escalerasFin = new int[numEscaleras];
+
+            List<Integer> casillasPosibles = new ArrayList<>();
+            for (int i = 2; i < totalCasillas; i++) {
+                casillasPosibles.add(i);
+            }
+
+            int maxIntentosUbicacion = 10000;
+            generacionExitosa = true;
+
+            for (int i = 0; i < numSerpientes && generacionExitosa; i++) {
+                int inicioSerpiente = ubicarfichasSE(random, casillasPosibles);
+                serpientesInicio[i] = inicioSerpiente;
+                int finSerpiente = generarUbicacionFinalSerpiente(random, inicioSerpiente, casillasPosibles, maxIntentosUbicacion);
+                if (finSerpiente == -1) {
+                    generacionExitosa = false;
+                    break;
+                }
+                serpientesFin[i] = finSerpiente;
+            }
+
+            if (generacionExitosa) {
+                for (int i = 0; i < numEscaleras && generacionExitosa; i++) {
+                    int inicioEscalera = ubicarfichasSE(random, casillasPosibles);
+                    escalerasInicio[i] = inicioEscalera;
+                    int finEscalera = generarUbicacionFinalEscalera(random, inicioEscalera, casillasPosibles, maxIntentosUbicacion);
+                    if (finEscalera == -1) {
+                        generacionExitosa = false;
+                        break;
+                    }
+                    escalerasFin[i] = finEscalera;
+                }
+            }
+
+            intentosRealizados++;
+        }
+
+        if (!generacionExitosa) {
+            System.err.println("No se pudo ubicar todas las serpientes y escaleras en el tablero después de " + maxIntentos + " intentos.");
         }
     }
 
@@ -141,7 +162,7 @@ public class Tablero extends JPanel {
         return finUbicacion;
     }
 
-    private int ubicarUbicacion(Random random, List<Integer> casillasPosibles) {
+    private int ubicarfichasSE(Random random, List<Integer> casillasPosibles) {
         int index = random.nextInt(casillasPosibles.size());
         int ubicacion = casillasPosibles.get(index);
         casillasPosibles.remove(index);
@@ -392,19 +413,21 @@ public class Tablero extends JPanel {
     public void moverJugador(Jugador jugador, int movimiento) {
         int viejaPos = jugador.getPosition();
         int nuevaPos = viejaPos + movimiento;
-
+        int destino = nuevaPos; 
         if (nuevaPos > rows * cols) {
             nuevaPos = viejaPos;
         } else if (isSerpienteInicio(nuevaPos)) {
-            nuevaPos = getSerpienteFin(nuevaPos);
-            EventoJuego evento = new EventoJuego("cayó en una serpiente y retrocedió a la posición " + nuevaPos, jugador.getNombre(), viejaPos, nuevaPos);
+            int serpienteFin = getSerpienteFin(nuevaPos);
+            nuevaPos = serpienteFin;
+            EventoJuego evento = new EventoJuego("se movió de la posición " + viejaPos + " a la posición " + nuevaPos + ", " + "cayó en una serpiente y retrocedió a la posición " + nuevaPos, jugador.getNombre(), viejaPos, nuevaPos);
             eventosJuego.add(evento);
-            JOptionPane.showMessageDialog(this, evento.getDescripcion(), "Serpiente", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "El jugador " + jugador.getNombre() + " se encontró con una serpiente y retrocedió desde la posición " + destino + " hasta la posición " + nuevaPos + ".", "Serpiente", JOptionPane.INFORMATION_MESSAGE);
         } else if (isEscaleraInicio(nuevaPos)) {
-            nuevaPos = getEscaleraFin(nuevaPos);
-            EventoJuego evento = new EventoJuego("encontró una escalera y avanzó a la posición " + nuevaPos, jugador.getNombre(), viejaPos, nuevaPos);
+            int escaleraFin = getEscaleraFin(nuevaPos);
+            nuevaPos = escaleraFin;
+            EventoJuego evento = new EventoJuego("se movió de la posición " + viejaPos + " a la posición " + destino + " y " + "encontró una escalera y avanzó a la posición " + nuevaPos, jugador.getNombre(), viejaPos, nuevaPos);
             eventosJuego.add(evento);
-            JOptionPane.showMessageDialog(this, evento.getDescripcion(), "Escalera", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "El jugador " + jugador.getNombre() + " se encontró con una escalera y avanzó desde la posición " + destino + " hasta la posición " + nuevaPos + ".", "Escalera", JOptionPane.INFORMATION_MESSAGE);
         } else {
             EventoJuego evento = new EventoJuego("se movió de la posición " + viejaPos + " a la posición " + nuevaPos, jugador.getNombre(), viejaPos, nuevaPos);
             eventosJuego.add(evento);

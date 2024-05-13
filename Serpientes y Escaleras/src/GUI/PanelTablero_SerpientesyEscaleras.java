@@ -80,6 +80,12 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
         switch (tamañoTablero) {
             case 10:
                 jTabbedPane1.setSelectedIndex(0);
+                if (tablero13x13 != null) {
+                    tablero13x13.limpiarImagenesSerpientesYEscaleras(jPanel13x13);
+                }
+                if (tablero15x15 != null) {
+                    tablero15x15.limpiarImagenesSerpientesYEscaleras(jPanel15x15);
+                }
                 jPanel10x10.setLayout(new BorderLayout());
                 tablero10x10 = new Tablero(10, 10, jugadores, numEscaleras, numSerpientes);
                 jPanel10x10.add(tablero10x10, BorderLayout.CENTER);
@@ -98,6 +104,12 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
                 break;
             case 13:
                 jTabbedPane1.setSelectedIndex(1);
+                if (tablero10x10 != null) {
+                    tablero10x10.limpiarImagenesSerpientesYEscaleras(jPanel10x10);
+                }
+                if (tablero15x15 != null) {
+                    tablero15x15.limpiarImagenesSerpientesYEscaleras(jPanel15x15);
+                }
                 jPanel13x13.setLayout(new BorderLayout());
                 tablero13x13 = new Tablero(13, 13, jugadores, numEscaleras, numSerpientes);
                 jPanel13x13.add(tablero13x13, BorderLayout.CENTER);
@@ -116,6 +128,12 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
                 break;
             case 15:
                 jTabbedPane1.setSelectedIndex(2);
+                if (tablero10x10 != null) {
+                    tablero10x10.limpiarImagenesSerpientesYEscaleras(jPanel10x10);
+                }
+                if (tablero13x13 != null) {
+                    tablero13x13.limpiarImagenesSerpientesYEscaleras(jPanel13x13);
+                }
                 jPanel15x15.setLayout(new BorderLayout());
                 tablero15x15 = new Tablero(15, 15, jugadores, numEscaleras, numSerpientes);
                 jPanel15x15.add(tablero15x15, BorderLayout.CENTER);
