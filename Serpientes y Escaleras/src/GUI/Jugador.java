@@ -18,14 +18,12 @@ public class Jugador {
     private ImageIcon fichaIcon;
     private int id;
     private int position;
-    private Color color;
-
+    
     public Jugador(int id, String nombre, ImageIcon fichaIcon) {
         this.nombre = nombre;
         this.fichaIcon = fichaIcon;
         this.position = 1;
         this.id = id;
-        this.color = getRandomColor();
     }
 
     public String getNombre() {
@@ -48,19 +46,9 @@ public class Jugador {
         this.position = position;
     }
 
-    public Color getColor() {
-        return color;
-    }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    private Color getRandomColor() {
-        Random random = new Random();
-        float r = random.nextFloat();
-        float g = random.nextFloat();
-        float b = random.nextFloat();
-        return new Color(r, g, b);
-    }
 }
