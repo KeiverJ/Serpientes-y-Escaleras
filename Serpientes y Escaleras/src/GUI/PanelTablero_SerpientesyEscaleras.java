@@ -430,7 +430,7 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
             .addGroup(jPanel4x4Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addComponent(jPanel10x10, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         jPanel4x4Layout.setVerticalGroup(
             jPanel4x4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -466,7 +466,7 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
             .addGroup(jPanel5x5Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addComponent(jPanel13x13, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         jPanel5x5Layout.setVerticalGroup(
             jPanel5x5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -488,7 +488,7 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
         jPanel15x15.setLayout(jPanel15x15Layout);
         jPanel15x15Layout.setHorizontalGroup(
             jPanel15x15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 716, Short.MAX_VALUE)
+            .addGap(0, 706, Short.MAX_VALUE)
         );
         jPanel15x15Layout.setVerticalGroup(
             jPanel15x15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -501,7 +501,7 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
             jPanel3x3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3x3Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(jPanel15x15, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
+                .addComponent(jPanel15x15, javax.swing.GroupLayout.DEFAULT_SIZE, 710, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel3x3Layout.setVerticalGroup(
@@ -515,7 +515,7 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
         jTabbedPane1.addTab("", jPanel3x3);
 
         panelFondo.add(jTabbedPane1);
-        jTabbedPane1.setBounds(0, 10, 770, 750);
+        jTabbedPane1.setBounds(10, 10, 760, 750);
 
         txtASerpientesyEscaleras.setEditable(false);
         txtASerpientesyEscaleras.setBackground(new java.awt.Color(240, 232, 216));

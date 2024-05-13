@@ -50,10 +50,6 @@ public class PanelMain_SerpientesyEscaleras extends javax.swing.JFrame {
         while (!cantidadValida) {
             String input = JOptionPane.showInputDialog(mensaje);
 
-            if (input == null) {
-                return -1; 
-            }
-
             try {
                 cantidad = Integer.parseInt(input);
 
