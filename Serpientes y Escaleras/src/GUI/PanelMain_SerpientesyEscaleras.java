@@ -48,8 +48,14 @@ public class PanelMain_SerpientesyEscaleras extends javax.swing.JFrame {
         boolean cantidadValida = false;
 
         while (!cantidadValida) {
+            String input = JOptionPane.showInputDialog(mensaje);
+
+            if (input == null) {
+                return -1; 
+            }
+
             try {
-                cantidad = Integer.parseInt(JOptionPane.showInputDialog(mensaje));
+                cantidad = Integer.parseInt(input);
 
                 if (cantidad < 0) {
                     JOptionPane.showMessageDialog(this, "La cantidad debe ser un número positivo.", "Error", JOptionPane.ERROR_MESSAGE);
