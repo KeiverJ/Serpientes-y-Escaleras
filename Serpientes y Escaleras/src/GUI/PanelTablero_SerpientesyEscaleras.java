@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package GUI;
 
 import java.awt.BorderLayout;
@@ -404,7 +408,7 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
 
         jPanel4x4.setBackground(new java.awt.Color(240, 232, 216));
 
-        jPanel10x10.setBackground(new java.awt.Color(162, 213, 242));
+        jPanel10x10.setBackground(new java.awt.Color(255, 255, 255));
         jPanel10x10.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel10x10.setPreferredSize(new java.awt.Dimension(220, 220));
 
@@ -440,7 +444,7 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
 
         jPanel5x5.setBackground(new java.awt.Color(240, 232, 216));
 
-        jPanel13x13.setBackground(new java.awt.Color(162, 213, 242));
+        jPanel13x13.setBackground(new java.awt.Color(255, 255, 255));
         jPanel13x13.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel13x13.setPreferredSize(new java.awt.Dimension(220, 220));
 
@@ -476,7 +480,7 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
 
         jPanel3x3.setBackground(new java.awt.Color(240, 232, 216));
 
-        jPanel15x15.setBackground(new java.awt.Color(162, 213, 242));
+        jPanel15x15.setBackground(new java.awt.Color(255, 255, 255));
         jPanel15x15.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel15x15.setPreferredSize(new java.awt.Dimension(660, 660));
 
@@ -516,6 +520,7 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
         txtASerpientesyEscaleras.setEditable(false);
         txtASerpientesyEscaleras.setBackground(new java.awt.Color(240, 232, 216));
         txtASerpientesyEscaleras.setColumns(20);
+        txtASerpientesyEscaleras.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 12)); // NOI18N
         txtASerpientesyEscaleras.setRows(5);
         jScrollPane1.setViewportView(txtASerpientesyEscaleras);
 
