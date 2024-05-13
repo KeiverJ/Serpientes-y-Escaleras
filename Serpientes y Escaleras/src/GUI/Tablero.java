@@ -419,7 +419,7 @@ public class Tablero extends JPanel {
         } else if (isSerpienteInicio(nuevaPos)) {
             int serpienteFin = getSerpienteFin(nuevaPos);
             nuevaPos = serpienteFin;
-            EventoJuego evento = new EventoJuego("se movió de la posición " + viejaPos + " a la posición " + nuevaPos + ", " + "cayó en una serpiente y retrocedió a la posición " + nuevaPos, jugador.getNombre(), viejaPos, nuevaPos);
+            EventoJuego evento = new EventoJuego("se movió de la posición " + viejaPos + " a la posición " + destino + ", " + "cayó en una serpiente y retrocedió a la posición " + nuevaPos, jugador.getNombre(), viejaPos, nuevaPos);
             eventosJuego.add(evento);
             JOptionPane.showMessageDialog(this, "El jugador " + jugador.getNombre() + " se encontró con una serpiente y retrocedió desde la posición " + destino + " hasta la posición " + nuevaPos + ".", "Serpiente", JOptionPane.INFORMATION_MESSAGE);
         } else if (isEscaleraInicio(nuevaPos)) {
