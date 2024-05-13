@@ -55,12 +55,12 @@ public class PanelMain_SerpientesyEscaleras extends javax.swing.JFrame {
 
                 if (cantidad < 0) {
                     JOptionPane.showMessageDialog(this, "La cantidad debe ser un número positivo.", "Error", JOptionPane.ERROR_MESSAGE);
-                } else if (rbt10x10.isSelected() && cantidad > 10) {
-                    JOptionPane.showMessageDialog(this, "La cantidad máxima permitida para el tablero 10x10 es 10.", "Error", JOptionPane.ERROR_MESSAGE);
-                } else if (rbt13x13.isSelected() && cantidad > 25) {
-                    JOptionPane.showMessageDialog(this, "La cantidad máxima permitida para el tablero 13x13 es 25.", "Error", JOptionPane.ERROR_MESSAGE);
-                } else if (rbt15x15.isSelected() && cantidad > 35) {
-                    JOptionPane.showMessageDialog(this, "La cantidad máxima permitida para el tablero 15x15 es 35.", "Error", JOptionPane.ERROR_MESSAGE);
+                } else if (rbt10x10.isSelected() && cantidad > 20) {
+                    JOptionPane.showMessageDialog(this, "La cantidad máxima permitida para el tablero 10x10 es 20.", "Error", JOptionPane.ERROR_MESSAGE);
+                } else if (rbt13x13.isSelected() && cantidad > 35) {
+                    JOptionPane.showMessageDialog(this, "La cantidad máxima permitida para el tablero 13x13 es 35.", "Error", JOptionPane.ERROR_MESSAGE);
+                } else if (rbt15x15.isSelected() && cantidad > 40) {
+                    JOptionPane.showMessageDialog(this, "La cantidad máxima permitida para el tablero 15x15 es 40.", "Error", JOptionPane.ERROR_MESSAGE);
                 } else {
                     cantidadValida = true;
                 }

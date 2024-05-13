@@ -647,33 +647,53 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
     }//GEN-LAST:event_lblLanzarDadoMousePressed
 
     private void lblCambiarTableroMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCambiarTableroMousePressed
-        String inputSerpientes = JOptionPane.showInputDialog(this, "Ingrese la cantidad de serpientes");
-        if (inputSerpientes != null && !inputSerpientes.isEmpty()) {
-            try {
-                int numSerpientes = Integer.parseInt(inputSerpientes);
-                String inputEscaleras = JOptionPane.showInputDialog(this, "Ingrese la cantidad de escaleras");
-                if (inputEscaleras != null && !inputEscaleras.isEmpty()) {
-                    try {
-                        int numEscaleras = Integer.parseInt(inputEscaleras);
-                        if (tableroActual != null) {
-                            tableroActual.limpiarTablero();
+        boolean continuar = true;
+        while (continuar) {
+            String inputSerpientes = JOptionPane.showInputDialog(this, "Ingrese la cantidad de serpientes");
+            if (inputSerpientes != null && !inputSerpientes.isEmpty()) {
+                try {
+                    int numSerpientes = Integer.parseInt(inputSerpientes);
+                    String inputEscaleras = JOptionPane.showInputDialog(this, "Ingrese la cantidad de escaleras");
+                    if (inputEscaleras != null && !inputEscaleras.isEmpty()) {
+                        try {
+                            int numEscaleras = Integer.parseInt(inputEscaleras);
+                            if (tableroActual != null) {
+                                tableroActual.limpiarTablero();
+                            }
+                            if (rbt10x10.isSelected()) {
+                                if (numSerpientes <= 20 && numEscaleras <= 20) {
+                                    init(10, numEscaleras, numSerpientes);
+                                    tablero10x10.reiniciarPosicionJugadores();
+                                    continuar = false;
+                                } else {
+                                    JOptionPane.showMessageDialog(this, "El número máximo de serpientes y escaleras para un tablero de 10x10 es 20.", "Error", JOptionPane.ERROR_MESSAGE);
+                                }
+                            } else if (rbt13x13.isSelected()) {
+                                if (numSerpientes <= 35 && numEscaleras <= 35) {
+                                    init(13, numEscaleras, numSerpientes);
+                                    tablero13x13.reiniciarPosicionJugadores();
+                                    continuar = false;
+                                } else {
+                                    JOptionPane.showMessageDialog(this, "El número máximo de serpientes y escaleras para un tablero de 13x13 es 35.", "Error", JOptionPane.ERROR_MESSAGE);
+                                }
+                            } else if (rbt15x15.isSelected()) {
+                                if (numSerpientes <= 40 && numEscaleras <= 40) {
+                                    init(15, numEscaleras, numSerpientes);
+                                    tablero15x15.reiniciarPosicionJugadores();
+                                    continuar = false;
+                                } else {
+                                    JOptionPane.showMessageDialog(this, "El número máximo de serpientes y escaleras para un tablero de 15x15 es 40.", "Error", JOptionPane.ERROR_MESSAGE);
+                                }
+                            }
+                        } catch (NumberFormatException e) {
+                            JOptionPane.showMessageDialog(this, "Entrada inválida para escaleras. Por favor, ingrese un número entero.", "Error", JOptionPane.ERROR_MESSAGE);
                         }
-                        if (rbt10x10.isSelected()) {
-                            init(10, numEscaleras, numSerpientes);
-                            tablero10x10.reiniciarPosicionJugadores();
-                        } else if (rbt13x13.isSelected()) {
-                            init(13, numEscaleras, numSerpientes);
-                            tablero13x13.reiniciarPosicionJugadores();
-                        } else if (rbt15x15.isSelected()) {
-                            init(15, numEscaleras, numSerpientes);
-                            tablero15x15.reiniciarPosicionJugadores();
-                        }
-                    } catch (NumberFormatException e) {
-                        JOptionPane.showMessageDialog(this, "Entrada inválida para escaleras. Por favor, ingrese un número entero.", "Error", JOptionPane.ERROR_MESSAGE);
                     }
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(this, "Entrada inválida para serpientes. Por favor, ingrese un número entero.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(this, "Entrada inválida para serpientes. Por favor, ingrese un número entero.", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                continuar = false;
             }
         }
     }//GEN-LAST:event_lblCambiarTableroMousePressed
@@ -709,40 +729,60 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
     }//GEN-LAST:event_lblReiniciarMouseExited
 
     private void lblReiniciarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblReiniciarMousePressed
-        String inputSerpientes = JOptionPane.showInputDialog(this, "Ingrese la cantidad de serpientes");
-        if (inputSerpientes != null && !inputSerpientes.isEmpty()) {
-            try {
-                int numSerpientes = Integer.parseInt(inputSerpientes);
-                String inputEscaleras = JOptionPane.showInputDialog(this, "Ingrese la cantidad de escaleras");
-                if (inputEscaleras != null && !inputEscaleras.isEmpty()) {
-                    try {
-                        int numEscaleras = Integer.parseInt(inputEscaleras);
-                        if (tableroActual != null) {
-                            tableroActual.limpiarTablero();
-                        }
+        boolean continuar = true;
+        while (continuar) {
+            String inputSerpientes = JOptionPane.showInputDialog(this, "Ingrese la cantidad de serpientes");
+            if (inputSerpientes != null && !inputSerpientes.isEmpty()) {
+                try {
+                    int numSerpientes = Integer.parseInt(inputSerpientes);
+                    String inputEscaleras = JOptionPane.showInputDialog(this, "Ingrese la cantidad de escaleras");
+                    if (inputEscaleras != null && !inputEscaleras.isEmpty()) {
+                        try {
+                            int numEscaleras = Integer.parseInt(inputEscaleras);
+                            if (tableroActual != null) {
+                                tableroActual.limpiarTablero();
+                            }
 
-                        switch (tamañoTableroActual) {
-                            case 10:
-                                init(10, numEscaleras, numSerpientes);
-                                tablero10x10.reiniciarPosicionJugadores();
-                                break;
-                            case 13:
-                                init(13, numEscaleras, numSerpientes);
-                                tablero13x13.reiniciarPosicionJugadores();
-                                break;
-                            case 15:
-                                init(15, numEscaleras, numSerpientes);
-                                tablero15x15.reiniciarPosicionJugadores();
-                                break;
-                            default:
-                                break;
+                            switch (tamañoTableroActual) {
+                                case 10:
+                                    if (numSerpientes <= 20 && numEscaleras <= 20) {
+                                        init(10, numEscaleras, numSerpientes);
+                                        tablero10x10.reiniciarPosicionJugadores();
+                                        continuar = false;
+                                    } else {
+                                        JOptionPane.showMessageDialog(this, "El número máximo de serpientes y escaleras para un tablero de 10x10 es 20.", "Error", JOptionPane.ERROR_MESSAGE);
+                                    }
+                                    break;
+                                case 13:
+                                    if (numSerpientes <= 35 && numEscaleras <= 35) {
+                                        init(13, numEscaleras, numSerpientes);
+                                        tablero13x13.reiniciarPosicionJugadores();
+                                        continuar = false;
+                                    } else {
+                                        JOptionPane.showMessageDialog(this, "El número máximo de serpientes y escaleras para un tablero de 13x13 es 35.", "Error", JOptionPane.ERROR_MESSAGE);
+                                    }
+                                    break;
+                                case 15:
+                                    if (numSerpientes <= 40 && numEscaleras <= 40) {
+                                        init(15, numEscaleras, numSerpientes);
+                                        tablero15x15.reiniciarPosicionJugadores();
+                                        continuar = false; 
+                                    } else {
+                                        JOptionPane.showMessageDialog(this, "El número máximo de serpientes y escaleras para un tablero de 15x15 es 40.", "Error", JOptionPane.ERROR_MESSAGE);
+                                    }
+                                    break;
+                                default:
+                                    break;
+                            }
+                        } catch (NumberFormatException e) {
+                            JOptionPane.showMessageDialog(this, "Entrada inválida para escaleras. Por favor, ingrese un número entero.", "Error", JOptionPane.ERROR_MESSAGE);
                         }
-                    } catch (NumberFormatException e) {
-                        JOptionPane.showMessageDialog(this, "Entrada inválida para escaleras. Por favor, ingrese un número entero.", "Error", JOptionPane.ERROR_MESSAGE);
                     }
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(this, "Entrada inválida para serpientes. Por favor, ingrese un número entero.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(this, "Entrada inválida para serpientes. Por favor, ingrese un número entero.", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                continuar = false;
             }
         }
     }//GEN-LAST:event_lblReiniciarMousePressed

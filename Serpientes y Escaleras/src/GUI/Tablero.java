@@ -8,6 +8,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import javax.swing.ImageIcon;
@@ -54,10 +55,11 @@ public class Tablero extends JPanel {
     }
 
     public void limpiarTablero() {
-        for (Jugador jugador : jugadores) {
-            removerJugador(jugador);
+        Iterator<Jugador> iterator = jugadores.iterator();
+        while (iterator.hasNext()) {
+            Jugador jugador = iterator.next();
+            iterator.remove();
         }
-        jugadores.clear();
         repaint();
     }
 
@@ -134,10 +136,21 @@ public class Tablero extends JPanel {
 
     private int generarUbicacionFinalSerpiente(Random random, int inicioUbicacion, List<Integer> casillasPosibles, int maxIntentos) {
         int intentos = 0;
-        int finUbicacion;
+        int finUbicacion = -1;
+
         do {
-            finUbicacion = random.nextInt(inicioUbicacion - 2) + 1;
+            try {
+                finUbicacion = random.nextInt(Math.max(1, inicioUbicacion - 1)) + 1;
+            } catch (IllegalArgumentException e) {
+                if (intentos >= maxIntentos) {
+                    return -1; 
+                }
+                intentos++;
+                continue;
+            }
+
             intentos++;
+
             if (intentos > maxIntentos) {
                 return -1;
             }
@@ -413,7 +426,7 @@ public class Tablero extends JPanel {
     public void moverJugador(Jugador jugador, int movimiento) {
         int viejaPos = jugador.getPosition();
         int nuevaPos = viejaPos + movimiento;
-        int destino = nuevaPos; 
+        int destino = nuevaPos;
         if (nuevaPos > rows * cols) {
             nuevaPos = viejaPos;
         } else if (isSerpienteInicio(nuevaPos)) {
