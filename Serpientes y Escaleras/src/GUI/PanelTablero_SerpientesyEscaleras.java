@@ -2,13 +2,13 @@ package GUI;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-import java.util.Random;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
 import javax.swing.Timer;
 
 /**
@@ -22,6 +22,8 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
     private int numSerpientes;
     private int numEscaleras;
     private int jugadorActualIndex = 0;
+    private Tablero tableroActual;
+    private JTextArea txtRegistroEventos;
 
     int tamañoTableroActual;
 
@@ -59,6 +61,15 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
 
     }
 
+    private void mostrarRegistroEventos() {
+        StringBuilder sb = new StringBuilder();
+        List<EventoJuego> eventosJuego = tableroActual.getEventosJuego();
+        for (EventoJuego evento : eventosJuego) {
+            sb.append(evento.getDescripcion()).append("\n");
+        }
+        txtRegistroEventos.setText(sb.toString());
+    }
+
     private void init(int tamañoTablero, int numEscaleras, int numSerpientes) {
         String ubicaciones;
 
@@ -75,7 +86,9 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
                 rbt15x15.setEnabled(true);
                 for (Jugador jugador : jugadores) {
                     tablero10x10.agregarJugador(jugador);
+                    jugador.setPosition(jugador.getPosition());
                 }
+                tableroActual = tablero10x10;
                 ubicaciones = tablero10x10.obtenerUbicacionesSerpientesYEscaleras();
                 txtASerpientesyEscaleras.setText(ubicaciones);
                 break;
@@ -91,7 +104,9 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
                 rbt15x15.setEnabled(true);
                 for (Jugador jugador : jugadores) {
                     tablero13x13.agregarJugador(jugador);
+                    jugador.setPosition(jugador.getPosition());
                 }
+                tableroActual = tablero13x13;
                 ubicaciones = tablero13x13.obtenerUbicacionesSerpientesYEscaleras();
                 txtASerpientesyEscaleras.setText(ubicaciones);
                 break;
@@ -107,7 +122,9 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
                 rbt15x15.setEnabled(false);
                 for (Jugador jugador : jugadores) {
                     tablero15x15.agregarJugador(jugador);
+                    jugador.setPosition(jugador.getPosition());
                 }
+                tableroActual = tablero15x15;
                 ubicaciones = tablero15x15.obtenerUbicacionesSerpientesYEscaleras();
                 txtASerpientesyEscaleras.setText(ubicaciones);
                 break;
@@ -573,21 +590,7 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
                     lblDado.setIcon(iconoResultado);
 
                     Jugador jugadorActual = jugadores.get(jugadorActualIndex);
-
-                    switch (tamañoTableroActual) {
-                        case 10:
-                            tablero10x10.moverJugador(jugadorActual, resultado);
-                            break;
-                        case 13:
-                            tablero13x13.moverJugador(jugadorActual, resultado);
-                            break;
-                        case 15:
-                            tablero15x15.moverJugador(jugadorActual, resultado);
-                            break;
-                        default:
-                            break;
-                    }
-
+                    tableroActual.moverJugador(jugadorActual, resultado);
                     jugadorActualIndex = (jugadorActualIndex + 1) % jugadores.size();
                 }
             }
@@ -603,13 +606,18 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
                 if (inputEscaleras != null && !inputEscaleras.isEmpty()) {
                     try {
                         int numEscaleras = Integer.parseInt(inputEscaleras);
-                        limpiarTablero();
+                        if (tableroActual != null) {
+                            tableroActual.limpiarTablero();
+                        }
                         if (rbt10x10.isSelected()) {
                             init(10, numEscaleras, numSerpientes);
+                            tablero10x10.reiniciarPosicionJugadores();
                         } else if (rbt13x13.isSelected()) {
                             init(13, numEscaleras, numSerpientes);
+                            tablero13x13.reiniciarPosicionJugadores();
                         } else if (rbt15x15.isSelected()) {
                             init(15, numEscaleras, numSerpientes);
+                            tablero15x15.reiniciarPosicionJugadores();
                         }
                     } catch (NumberFormatException e) {
                         JOptionPane.showMessageDialog(this, "Entrada inválida para escaleras. Por favor, ingrese un número entero.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -638,7 +646,9 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
     }//GEN-LAST:event_lblHistorialMouseExited
 
     private void lblHistorialMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHistorialMousePressed
-
+        List<EventoJuego> eventosJuego = tableroActual.getEventosJuego();
+        RegistroEventosDialog dialog = new RegistroEventosDialog(this, eventosJuego);
+        dialog.setVisible(true);
     }//GEN-LAST:event_lblHistorialMousePressed
 
     public void moverJugadorActual(int resultado) {
@@ -656,31 +666,6 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
             case 15:
                 tablero15x15.moverJugador(jugadorActual, resultado);
                 this.jugadorActual = (this.jugadorActual + 1) % jugadores.size();
-                break;
-            default:
-                break;
-        }
-    }
-
-    private void limpiarTablero() {
-        switch (tamañoTableroActual) {
-            case 10:
-                for (Jugador jugador : jugadores) {
-                    tablero10x10.removerJugador(jugador);
-                }
-                jPanel10x10.removeAll();
-                break;
-            case 13:
-                for (Jugador jugador : jugadores) {
-                    tablero13x13.removerJugador(jugador);
-                }
-                jPanel13x13.removeAll();
-                break;
-            case 15:
-                for (Jugador jugador : jugadores) {
-                    tablero15x15.removerJugador(jugador);
-                }
-                jPanel15x15.removeAll();
                 break;
             default:
                 break;

@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import javax.swing.ImageIcon;
@@ -23,13 +22,30 @@ public class Tablero extends JPanel {
     private int jugadorActual;
 
     private List<Jugador> jugadores;
+    private List<EventoJuego> eventosJuego;
 
     public Tablero(int rows, int cols, List<Jugador> jugadores, int numEscaleras, int numSerpientes) {
         this.rows = rows;
         this.cols = cols;
         this.jugadores = new ArrayList<>();
+        this.eventosJuego = new ArrayList<>();
         configurarSerpientesYEscaleras(numEscaleras, numSerpientes);
         jugadorActual = 1;
+    }
+
+    public void reiniciarPosicionJugadores() {
+        for (Jugador jugador : jugadores) {
+            jugador.setPosition(1);
+        }
+        repaint();
+    }
+
+    public void limpiarTablero() {
+        for (Jugador jugador : jugadores) {
+            removerJugador(jugador);
+        }
+        jugadores.clear();
+        repaint();
     }
 
     private void configurarSerpientesYEscaleras(int numEscaleras, int numSerpientes) {
@@ -59,7 +75,6 @@ public class Tablero extends JPanel {
 
         int maxIntentos = 100;
 
-        // Ubicar serpientes
         for (int i = 0; i < numSerpientes; i++) {
             int inicioSerpiente = ubicarUbicacion(random, casillasPosibles);
             serpientesInicio[i] = inicioSerpiente;
@@ -71,7 +86,6 @@ public class Tablero extends JPanel {
             serpientesFin[i] = finSerpiente;
         }
 
-        // Ubicar escaleras
         for (int i = 0; i < numEscaleras; i++) {
             int inicioEscalera = ubicarUbicacion(random, casillasPosibles);
             escalerasInicio[i] = inicioEscalera;
@@ -103,7 +117,7 @@ public class Tablero extends JPanel {
         int intentos = 0;
         int finUbicacion;
         do {
-            finUbicacion = random.nextInt(rows * cols - inicioUbicacion) + inicioUbicacion + 1; 
+            finUbicacion = random.nextInt(rows * cols - inicioUbicacion) + inicioUbicacion + 1;
             intentos++;
             if (intentos > maxIntentos) {
                 return -1;
@@ -229,23 +243,28 @@ public class Tablero extends JPanel {
             nuevaPos = viejaPos;
         } else if (isSerpienteInicio(nuevaPos)) {
             nuevaPos = getSerpienteFin(nuevaPos);
-            JOptionPane.showMessageDialog(this, "¡Oh no! El jugador cayó en una serpiente y retrocedió a la posición ");
+            EventoJuego evento = new EventoJuego("cayó en una serpiente y retrocedió a la posición " + nuevaPos, jugador.getNombre(), viejaPos, nuevaPos);
+            eventosJuego.add(evento);
         } else if (isEscaleraInicio(nuevaPos)) {
             nuevaPos = getEscaleraFin(nuevaPos);
-            JOptionPane.showMessageDialog(this, "¡Bien! El jugador encontró una escalera y avanzó a la posición ");
+            EventoJuego evento = new EventoJuego("encontró una escalera y avanzó a la posición " + nuevaPos, jugador.getNombre(), viejaPos, nuevaPos);
+            eventosJuego.add(evento);
+        } else {
+            EventoJuego evento = new EventoJuego("se movió de la posición " + viejaPos + " a la posición " + nuevaPos, jugador.getNombre(), viejaPos, nuevaPos);
+            eventosJuego.add(evento);
         }
 
         jugador.setPosition(nuevaPos);
 
         if (nuevaPos == rows * cols) {
-            JOptionPane.showMessageDialog(this, "¡Felicidades! El jugador " + jugador.getNombre() + " ha ganado el juego.");
+            EventoJuego evento = new EventoJuego("ha ganado el juego.", jugador.getNombre(), viejaPos, nuevaPos);
+            eventosJuego.add(evento);
+            JOptionPane.showMessageDialog(this, evento.getDescripcion());
         }
 
         repaint();
     }
-    
 
-    
     private boolean isSerpienteInicio(int pos) {
         return contains(serpientesInicio, pos);
     }
@@ -287,5 +306,9 @@ public class Tablero extends JPanel {
 
     public void removerJugador(Jugador jugador) {
         jugadores.remove(jugador);
+    }
+
+    public List<EventoJuego> getEventosJuego() {
+        return eventosJuego;
     }
 }
