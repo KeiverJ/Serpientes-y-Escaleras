@@ -6,7 +6,7 @@ package GUI;
 
 /**
  *
- * @author keive
+ * @author keiver
  */
 public class EventoJuego {
 

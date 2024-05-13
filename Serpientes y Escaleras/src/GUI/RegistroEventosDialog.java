@@ -6,7 +6,7 @@ package GUI;
 
 /**
  *
- * @author keive
+ * @author keiver
  */
 import javax.swing.*;
 import java.awt.*;
@@ -17,12 +17,17 @@ public class RegistroEventosDialog extends JDialog {
     private JTextArea txtRegistroEventos;
 
     public RegistroEventosDialog(Frame parent, List<EventoJuego> eventosJuego) {
-        super(parent, "Registro de Eventos", true);
+        setUndecorated(true);
         setSize(400, 400);
         setLocationRelativeTo(parent);
 
+        JPanel panel = new JPanel(new BorderLayout());
+        panel.setBackground(new Color(240, 232, 216));
+
         txtRegistroEventos = new JTextArea();
         txtRegistroEventos.setEditable(false);
+        txtRegistroEventos.setBackground(new Color(240, 232, 216));
+        txtRegistroEventos.setOpaque(true);
 
         StringBuilder sb = new StringBuilder();
         for (EventoJuego evento : eventosJuego) {
@@ -30,7 +35,13 @@ public class RegistroEventosDialog extends JDialog {
         }
         txtRegistroEventos.setText(sb.toString());
 
-        JScrollPane scrollPane = new JScrollPane(txtRegistroEventos);
-        getContentPane().add(scrollPane, BorderLayout.CENTER);
+        panel.add(txtRegistroEventos, BorderLayout.CENTER);
+
+        JButton btnCerrar = new JButton("Cerrar");
+        btnCerrar.addActionListener(e -> dispose());
+        panel.add(btnCerrar, BorderLayout.SOUTH);
+
+        getContentPane().add(panel);
     }
+
 }

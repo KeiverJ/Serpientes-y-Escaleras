@@ -8,6 +8,10 @@ import java.awt.Image;
 import java.util.Random;
 import javax.swing.ImageIcon;
 
+/**
+ *
+ * @author keiver
+ */
 public class Dado {
 
     private static final String RUTA_RECURSOS = "/resources/";
