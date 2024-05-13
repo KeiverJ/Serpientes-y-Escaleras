@@ -174,73 +174,138 @@ public class Tablero extends JPanel {
         g.fillRect(0, 0, panelWidth, panelHeight);
 
         for (int row = 0; row < rows; row++) {
-            for (int col = 0; col < cols; col++) {
-                int x = (int) (col * CELL_SIZE_X);
-                int y = (int) ((rows - row - 1) * CELL_SIZE_Y);
-                int cellValue = row * cols + col + 1;
+            if (row % 2 == 0) {
+                for (int col = 0; col < cols; col++) {
+                    int x = (int) (col * CELL_SIZE_X);
+                    int y = (int) ((rows - row - 1) * CELL_SIZE_Y);
+                    int cellValue = row * cols + col + 1;
 
-                Color cellColor = Color.WHITE;
-                Color textColor = Color.BLACK;
+                    Color cellColor = Color.WHITE;
+                    Color textColor = Color.BLACK;
 
-                boolean isSerpienteStart = false;
-                boolean isSerpienteEnd = false;
-                boolean isEscaleraStart = false;
-                boolean isEscaleraEnd = false;
+                    boolean isSerpienteStart = false;
+                    boolean isSerpienteEnd = false;
+                    boolean isEscaleraStart = false;
+                    boolean isEscaleraEnd = false;
 
-                for (int i = 0; i < serpientesInicio.length; i++) {
-                    if (cellValue == serpientesInicio[i]) {
-                        isSerpienteStart = true;
+                    for (int i = 0; i < serpientesInicio.length; i++) {
+                        if (cellValue == serpientesInicio[i]) {
+                            isSerpienteStart = true;
+                        }
+                        if (cellValue == serpientesFin[i]) {
+                            isSerpienteEnd = true;
+                        }
                     }
-                    if (cellValue == serpientesFin[i]) {
-                        isSerpienteEnd = true;
+
+                    for (int i = 0; i < escalerasInicio.length; i++) {
+                        if (cellValue == escalerasInicio[i]) {
+                            isEscaleraStart = true;
+                        }
+                        if (cellValue == escalerasFin[i]) {
+                            isEscaleraEnd = true;
+                        }
                     }
-                }
 
-                for (int i = 0; i < escalerasInicio.length; i++) {
-                    if (cellValue == escalerasInicio[i]) {
-                        isEscaleraStart = true;
+                    if (isSerpienteStart && isSerpienteEnd) {
+                        cellColor = Color.RED;
+                    } else if (isEscaleraStart && isEscaleraEnd) {
+                        cellColor = Color.GREEN;
+                    } else if (isSerpienteStart || isSerpienteEnd) {
+                        cellColor = Color.RED;
+                    } else if (isEscaleraStart || isEscaleraEnd) {
+                        cellColor = Color.GREEN;
                     }
-                    if (cellValue == escalerasFin[i]) {
-                        isEscaleraEnd = true;
+
+                    g.setColor(cellColor);
+                    g.fillRect(x, y, (int) CELL_SIZE_X, (int) CELL_SIZE_Y);
+                    g.setColor(Color.GRAY);
+                    g.drawRect(x, y, (int) CELL_SIZE_X, (int) CELL_SIZE_Y);
+
+                    if (cellColor.equals(Color.BLACK)) {
+                        textColor = Color.WHITE;
                     }
+
+                    g.setColor(textColor);
+                    g.drawString(String.valueOf(cellValue), x + (int) (CELL_SIZE_X / 4), y + (int) (3 * CELL_SIZE_Y / 4));
                 }
+            } else {
+                for (int col = cols - 1; col >= 0; col--) {
+                    int x = (int) (col * CELL_SIZE_X);
+                    int y = (int) ((rows - row - 1) * CELL_SIZE_Y);
+                    int cellValue = row * cols + (cols - col);
 
-                if (isSerpienteStart && isSerpienteEnd) {
-                    cellColor = Color.RED;
-                } else if (isEscaleraStart && isEscaleraEnd) {
-                    cellColor = Color.GREEN;
-                } else if (isSerpienteStart || isSerpienteEnd) {
-                    cellColor = Color.RED;
-                } else if (isEscaleraStart || isEscaleraEnd) {
-                    cellColor = Color.GREEN;
+                    Color cellColor = Color.WHITE;
+                    Color textColor = Color.BLACK;
+
+                    boolean isSerpienteStart = false;
+                    boolean isSerpienteEnd = false;
+                    boolean isEscaleraStart = false;
+                    boolean isEscaleraEnd = false;
+
+                    for (int i = 0; i < serpientesInicio.length; i++) {
+                        if (cellValue == serpientesInicio[i]) {
+                            isSerpienteStart = true;
+                        }
+                        if (cellValue == serpientesFin[i]) {
+                            isSerpienteEnd = true;
+                        }
+                    }
+
+                    for (int i = 0; i < escalerasInicio.length; i++) {
+                        if (cellValue == escalerasInicio[i]) {
+                            isEscaleraStart = true;
+                        }
+                        if (cellValue == escalerasFin[i]) {
+                            isEscaleraEnd = true;
+                        }
+                    }
+
+                    if (isSerpienteStart && isSerpienteEnd) {
+                        cellColor = Color.RED;
+                    } else if (isEscaleraStart && isEscaleraEnd) {
+                        cellColor = Color.GREEN;
+                    } else if (isSerpienteStart || isSerpienteEnd) {
+                        cellColor = Color.RED;
+                    } else if (isEscaleraStart || isEscaleraEnd) {
+                        cellColor = Color.GREEN;
+                    }
+
+                    g.setColor(cellColor);
+                    g.fillRect(x, y, (int) CELL_SIZE_X, (int) CELL_SIZE_Y);
+                    g.setColor(Color.GRAY);
+                    g.drawRect(x, y, (int) CELL_SIZE_X, (int) CELL_SIZE_Y);
+
+                    if (cellColor.equals(Color.BLACK)) {
+                        textColor = Color.WHITE;
+                    }
+
+                    g.setColor(textColor);
+                    g.drawString(String.valueOf(cellValue), x + (int) (CELL_SIZE_X / 4), y + (int) (3 * CELL_SIZE_Y / 4));
                 }
-
-                g.setColor(cellColor);
-                g.fillRect(x, y, (int) CELL_SIZE_X, (int) CELL_SIZE_Y);
-                g.setColor(Color.GRAY);
-                g.drawRect(x, y, (int) CELL_SIZE_X, (int) CELL_SIZE_Y);
-
-                if (cellColor.equals(Color.BLACK)) {
-                    textColor = Color.WHITE;
-                }
-
-                g.setColor(textColor);
-                g.drawString(String.valueOf(cellValue), x + (int) (CELL_SIZE_X / 4), y + (int) (3 * CELL_SIZE_Y / 4));
             }
         }
 
         for (Jugador jugador : jugadores) {
             int position = jugador.getPosition() - 1;
-            int row = (rows - 1) - position / cols;
-            int col = position % cols;
+            int row, col;
+
+            if (position / cols % 2 == 0) {
+                row = position / cols;
+                col = position % cols;
+            } else {
+                row = position / cols;
+                col = cols - 1 - (position % cols);
+            }
+
             int x = (int) (col * CELL_SIZE_X + CELL_SIZE_X / 4);
-            int y = (int) (row * CELL_SIZE_Y + CELL_SIZE_Y / 4);
+            int y = (int) ((rows - row - 1) * CELL_SIZE_Y + CELL_SIZE_Y / 4);
 
             ImageIcon jugadorIcon = jugador.getFichaIcon();
             Image img = jugadorIcon.getImage();
 
             g.drawImage(img, x, y, CELL_SIZE / 2, CELL_SIZE / 2, this);
         }
+
     }
 
     public void moverJugador(Jugador jugador, int movimiento) {
@@ -253,10 +318,12 @@ public class Tablero extends JPanel {
             nuevaPos = getSerpienteFin(nuevaPos);
             EventoJuego evento = new EventoJuego("cayó en una serpiente y retrocedió a la posición " + nuevaPos, jugador.getNombre(), viejaPos, nuevaPos);
             eventosJuego.add(evento);
+            JOptionPane.showMessageDialog(this, evento.getDescripcion(), "Serpiente", JOptionPane.INFORMATION_MESSAGE);
         } else if (isEscaleraInicio(nuevaPos)) {
             nuevaPos = getEscaleraFin(nuevaPos);
             EventoJuego evento = new EventoJuego("encontró una escalera y avanzó a la posición " + nuevaPos, jugador.getNombre(), viejaPos, nuevaPos);
             eventosJuego.add(evento);
+            JOptionPane.showMessageDialog(this, evento.getDescripcion(), "Escalera", JOptionPane.INFORMATION_MESSAGE);
         } else {
             EventoJuego evento = new EventoJuego("se movió de la posición " + viejaPos + " a la posición " + nuevaPos, jugador.getNombre(), viejaPos, nuevaPos);
             eventosJuego.add(evento);
@@ -267,7 +334,7 @@ public class Tablero extends JPanel {
         if (nuevaPos == rows * cols) {
             EventoJuego evento = new EventoJuego("ha ganado el juego.", jugador.getNombre(), viejaPos, nuevaPos);
             eventosJuego.add(evento);
-            JOptionPane.showMessageDialog(this, evento.getDescripcion());
+            JOptionPane.showMessageDialog(this, evento.getDescripcion(), "Ganador", JOptionPane.INFORMATION_MESSAGE);
         }
 
         repaint();
