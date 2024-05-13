@@ -38,6 +38,12 @@
     </div>
 </div>
 
+<h2>Ubicación de serpientes y escaleras:</h2>
+
+<div align="center">
+    <img src="https://github.com/KeiverJ/Serpientes-y-Escaleras/assets/160792532/f59c8ca0-249b-42d3-83e0-6920f64881f2" width="45%" />
+</div>
+
 <h2>Eventos:</h2>
 
 <div align="center">
