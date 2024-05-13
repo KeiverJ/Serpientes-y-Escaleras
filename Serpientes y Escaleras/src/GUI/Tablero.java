@@ -20,6 +20,11 @@ import javax.swing.JPanel;
  */
 public class Tablero extends JPanel {
 
+    ImageIcon serpienteInicioIcon = new ImageIcon(getClass().getResource("/resources/serpienteinicio.png"));
+    ImageIcon serpienteFinIcon = new ImageIcon(getClass().getResource("/resources/serpientefin.png"));
+    ImageIcon escaleraInicioIcon = new ImageIcon(getClass().getResource("/resources/escalera.png"));
+    ImageIcon escaleraFinIcon = new ImageIcon(getClass().getResource("/resources/escalera.png"));
+
     private static final int CELL_SIZE = 55;
     private final int rows;
     private final int cols;
@@ -162,6 +167,74 @@ public class Tablero extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         crearTablero(g);
+        dibujarSerpientesYEscaleras(g);
+
+    }
+
+    private void dibujarSerpientesYEscaleras(Graphics g) {
+        double CELL_SIZE_X = (double) getWidth() / cols;
+        double CELL_SIZE_Y = (double) getHeight() / rows;
+        double iconSize = Math.min(CELL_SIZE_X * 0.8, CELL_SIZE_Y * 0.8);
+
+        for (int i = 0; i < serpientesInicio.length; i++) {
+            int row = (serpientesInicio[i] - 1) / cols;
+            int col = (serpientesInicio[i] - 1) % cols;
+
+            int x, y;
+            if (row % 2 == 0) {
+                x = (int) ((col * CELL_SIZE_X) + (CELL_SIZE_X / 4));
+                y = (int) (((rows - row - 1) * CELL_SIZE_Y) + (CELL_SIZE_Y / 4));
+            } else {
+                x = (int) (((cols - col - 1) * CELL_SIZE_X) + (CELL_SIZE_X / 4));
+                y = (int) (((rows - row - 1) * CELL_SIZE_Y) + (CELL_SIZE_Y / 4));
+            }
+            g.drawImage(serpienteInicioIcon.getImage(), x, y, (int) (CELL_SIZE_X / 2), (int) (CELL_SIZE_Y / 2), this);
+        }
+
+        for (int i = 0; i < serpientesFin.length; i++) {
+            int row = (serpientesFin[i] - 1) / cols;
+            int col = (serpientesFin[i] - 1) % cols;
+
+            int x, y;
+            if (row % 2 == 0) {
+                x = (int) ((col * CELL_SIZE_X) + (CELL_SIZE_X / 4));
+                y = (int) (((rows - row - 1) * CELL_SIZE_Y) + (CELL_SIZE_Y / 4));
+            } else {
+                x = (int) (((cols - col - 1) * CELL_SIZE_X) + (CELL_SIZE_X / 4));
+                y = (int) (((rows - row - 1) * CELL_SIZE_Y) + (CELL_SIZE_Y / 4));
+            }
+            g.drawImage(serpienteFinIcon.getImage(), x, y, (int) iconSize, (int) iconSize, this);
+        }
+
+        for (int i = 0; i < escalerasInicio.length; i++) {
+            int row = (escalerasInicio[i] - 1) / cols;
+            int col = (escalerasInicio[i] - 1) % cols;
+
+            int x, y;
+            if (row % 2 == 0) {
+                x = (int) ((col * CELL_SIZE_X) + (CELL_SIZE_X / 4));
+                y = (int) (((rows - row - 1) * CELL_SIZE_Y) + (CELL_SIZE_Y / 4));
+            } else {
+                x = (int) (((cols - col - 1) * CELL_SIZE_X) + (CELL_SIZE_X / 4));
+                y = (int) (((rows - row - 1) * CELL_SIZE_Y) + (CELL_SIZE_Y / 4));
+            }
+            g.drawImage(escaleraInicioIcon.getImage(), x, y, (int) (CELL_SIZE_X / 2), (int) (CELL_SIZE_Y / 2), this);
+        }
+
+        for (int i = 0; i < escalerasFin.length; i++) {
+            int row = (escalerasFin[i] - 1) / cols;
+            int col = (escalerasFin[i] - 1) % cols;
+
+            int x, y;
+            if (row % 2 == 0) {
+                x = (int) ((col * CELL_SIZE_X) + (CELL_SIZE_X / 4));
+                y = (int) (((rows - row - 1) * CELL_SIZE_Y) + (CELL_SIZE_Y / 4));
+            } else {
+                x = (int) (((cols - col - 1) * CELL_SIZE_X) + (CELL_SIZE_X / 4));
+                y = (int) (((rows - row - 1) * CELL_SIZE_Y) + (CELL_SIZE_Y / 4));
+            }
+            g.drawImage(escaleraFinIcon.getImage(), x, y, (int) (CELL_SIZE_X / 2), (int) (CELL_SIZE_Y / 2), this);
+        }
     }
 
     private void crearTablero(Graphics g) {
@@ -206,16 +279,6 @@ public class Tablero extends JPanel {
                         }
                     }
 
-                    if (isSerpienteStart && isSerpienteEnd) {
-                        cellColor = Color.RED;
-                    } else if (isEscaleraStart && isEscaleraEnd) {
-                        cellColor = Color.GREEN;
-                    } else if (isSerpienteStart || isSerpienteEnd) {
-                        cellColor = Color.RED;
-                    } else if (isEscaleraStart || isEscaleraEnd) {
-                        cellColor = Color.GREEN;
-                    }
-
                     g.setColor(cellColor);
                     g.fillRect(x, y, (int) CELL_SIZE_X, (int) CELL_SIZE_Y);
                     g.setColor(Color.GRAY);
@@ -258,16 +321,6 @@ public class Tablero extends JPanel {
                         if (cellValue == escalerasFin[i]) {
                             isEscaleraEnd = true;
                         }
-                    }
-
-                    if (isSerpienteStart && isSerpienteEnd) {
-                        cellColor = Color.RED;
-                    } else if (isEscaleraStart && isEscaleraEnd) {
-                        cellColor = Color.GREEN;
-                    } else if (isSerpienteStart || isSerpienteEnd) {
-                        cellColor = Color.RED;
-                    } else if (isEscaleraStart || isEscaleraEnd) {
-                        cellColor = Color.GREEN;
                     }
 
                     g.setColor(cellColor);

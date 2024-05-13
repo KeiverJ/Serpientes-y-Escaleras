@@ -576,7 +576,6 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
     private void lblLanzarDadoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLanzarDadoMousePressed
         Dado dado = new Dado();
         final int resultado = dado.getValorDado();
-        System.out.println(resultado);
 
         final Timer timer = new Timer(50, null);
         timer.start();
