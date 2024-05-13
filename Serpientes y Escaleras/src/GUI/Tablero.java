@@ -168,7 +168,33 @@ public class Tablero extends JPanel {
         super.paintComponent(g);
         crearTablero(g);
         dibujarSerpientesYEscaleras(g);
+        dibujarFicha(g);
+    }
 
+    private void dibujarFicha(Graphics g) {
+        double CELL_SIZE_X = (double) getWidth() / cols;
+        double CELL_SIZE_Y = (double) getHeight() / rows;
+
+        for (Jugador jugador : jugadores) {
+            int position = jugador.getPosition() - 1;
+            int row, col;
+
+            if (position / cols % 2 == 0) {
+                row = position / cols;
+                col = position % cols;
+            } else {
+                row = position / cols;
+                col = cols - 1 - (position % cols);
+            }
+
+            int x = (int) (col * CELL_SIZE_X + CELL_SIZE_X / 4);
+            int y = (int) ((rows - row - 1) * CELL_SIZE_Y + CELL_SIZE_Y / 4);
+
+            ImageIcon jugadorIcon = jugador.getFichaIcon();
+            Image img = jugadorIcon.getImage();
+
+            g.drawImage(img, x, y, CELL_SIZE / 2, CELL_SIZE / 2, this);
+        }
     }
 
     private void dibujarSerpientesYEscaleras(Graphics g) {
@@ -359,27 +385,6 @@ public class Tablero extends JPanel {
                     g.drawString(String.valueOf(cellValue), x + (int) (CELL_SIZE_X / 4), y + (int) (3 * CELL_SIZE_Y / 4));
                 }
             }
-        }
-
-        for (Jugador jugador : jugadores) {
-            int position = jugador.getPosition() - 1;
-            int row, col;
-
-            if (position / cols % 2 == 0) {
-                row = position / cols;
-                col = position % cols;
-            } else {
-                row = position / cols;
-                col = cols - 1 - (position % cols);
-            }
-
-            int x = (int) (col * CELL_SIZE_X + CELL_SIZE_X / 4);
-            int y = (int) ((rows - row - 1) * CELL_SIZE_Y + CELL_SIZE_Y / 4);
-
-            ImageIcon jugadorIcon = jugador.getFichaIcon();
-            Image img = jugadorIcon.getImage();
-
-            g.drawImage(img, x, y, CELL_SIZE / 2, CELL_SIZE / 2, this);
         }
 
     }
