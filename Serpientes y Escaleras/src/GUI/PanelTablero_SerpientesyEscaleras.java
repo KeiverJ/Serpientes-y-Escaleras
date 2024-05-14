@@ -191,7 +191,7 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
         return 0;
     }
 
-    private void inicializarTablero(int tamañoTablero, int numEscaleras, int numSerpientes) {
+    private void init2(int tamañoTablero, int numEscaleras, int numSerpientes) {
         switch (tamañoTablero) {
             case 10:
                 init(10, numEscaleras, numSerpientes);
@@ -739,7 +739,7 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
                                 int numEscaleras = Integer.parseInt(inputEscaleras);
 
                                 if (validarCantidadSerpientesEscaleras(nuevoTamañoTablero, numSerpientes, numEscaleras)) {
-                                    inicializarTablero(nuevoTamañoTablero, numEscaleras, numSerpientes);
+                                    init2(nuevoTamañoTablero, numEscaleras, numSerpientes);
                                     tableroActual = nuevoTamañoTablero;
                                     tableroAnterior = tableroActual;
                                     continuar = false;

@@ -12,7 +12,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -27,8 +26,8 @@ public class Tablero extends JPanel {
     ImageIcon escaleraFinIcon = new ImageIcon(getClass().getResource("/resources/escalerafin.png"));
 
     private static final int CELL_SIZE = 55;
-    private final int rows;
-    private final int cols;
+    public final int rows;
+    public final int cols;
     private int[] serpientesInicio;
     private int[] serpientesFin;
     private int[] escalerasInicio;
@@ -36,7 +35,7 @@ public class Tablero extends JPanel {
     private int jugadorActual;
 
     private List<Jugador> jugadores;
-    private List<EventoJuego> eventosJuego;
+    public List<EventoJuego> eventosJuego;
 
     public Tablero(int rows, int cols, List<Jugador> jugadores, int numEscaleras, int numSerpientes) {
         this.rows = rows;
@@ -433,44 +432,15 @@ public class Tablero extends JPanel {
     }
 
     public void moverJugador(Jugador jugador, int movimiento) {
-        int viejaPos = jugador.getPosition();
-        int nuevaPos = viejaPos + movimiento;
-        int destino = nuevaPos;
-        if (nuevaPos > rows * cols) {
-            nuevaPos = viejaPos;
-        } else if (isSerpienteInicio(nuevaPos)) {
-            int serpienteFin = getSerpienteFin(nuevaPos);
-            nuevaPos = serpienteFin;
-            EventoJuego evento = new EventoJuego("se movió de la posición " + viejaPos + " a la posición " + destino + ", " + "cayó en una serpiente y retrocedió a la posición " + nuevaPos, jugador.getNombre(), viejaPos, nuevaPos);
-            eventosJuego.add(evento);
-            JOptionPane.showMessageDialog(this, "El jugador " + jugador.getNombre() + " se encontró con una serpiente y retrocedió desde la posición " + destino + " hasta la posición " + nuevaPos + ".", "Serpiente", JOptionPane.INFORMATION_MESSAGE);
-        } else if (isEscaleraInicio(nuevaPos)) {
-            int escaleraFin = getEscaleraFin(nuevaPos);
-            nuevaPos = escaleraFin;
-            EventoJuego evento = new EventoJuego("se movió de la posición " + viejaPos + " a la posición " + destino + ", " + "encontró una escalera y avanzó a la posición " + nuevaPos, jugador.getNombre(), viejaPos, nuevaPos);
-            eventosJuego.add(evento);
-            JOptionPane.showMessageDialog(this, "El jugador " + jugador.getNombre() + " se encontró con una escalera y avanzó desde la posición " + destino + " hasta la posición " + nuevaPos + ".", "Escalera", JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            EventoJuego evento = new EventoJuego("se movió de la posición " + viejaPos + " a la posición " + nuevaPos, jugador.getNombre(), viejaPos, nuevaPos);
-            eventosJuego.add(evento);
-        }
-
-        jugador.setPosition(nuevaPos);
-
-        if (nuevaPos == rows * cols) {
-            EventoJuego evento = new EventoJuego("ha ganado el juego.", jugador.getNombre(), viejaPos, nuevaPos);
-            eventosJuego.add(evento);
-            JOptionPane.showMessageDialog(this, evento.getDescripcion(), "Ganador", JOptionPane.INFORMATION_MESSAGE);
-        }
-
-        repaint();
+        FichaAnimada animacion = new FichaAnimada(jugador, movimiento, this, 300);
+        animacion.start();
     }
 
-    private boolean isSerpienteInicio(int pos) {
+    public boolean isSerpienteInicio(int pos) {
         return contains(serpientesInicio, pos);
     }
 
-    private int getSerpienteFin(int pos) {
+    public int getSerpienteFin(int pos) {
         for (int i = 0; i < serpientesInicio.length; i++) {
             if (serpientesInicio[i] == pos) {
                 return serpientesFin[i];
@@ -479,11 +449,11 @@ public class Tablero extends JPanel {
         return pos;
     }
 
-    private boolean isEscaleraInicio(int pos) {
+    public boolean isEscaleraInicio(int pos) {
         return contains(escalerasInicio, pos);
     }
 
-    private int getEscaleraFin(int pos) {
+    public int getEscaleraFin(int pos) {
         for (int i = 0; i < escalerasInicio.length; i++) {
             if (escalerasInicio[i] == pos) {
                 return escalerasFin[i];
