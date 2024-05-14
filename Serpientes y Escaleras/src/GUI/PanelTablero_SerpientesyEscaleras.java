@@ -278,25 +278,21 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
         lblNombreJ1.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         lblNombreJ1.setForeground(new java.awt.Color(124, 195, 236));
         lblNombreJ1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblNombreJ1.setText("NAME");
         jPanel2.add(lblNombreJ1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 100, 40));
 
         lblNombreJ2.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         lblNombreJ2.setForeground(new java.awt.Color(255, 170, 92));
         lblNombreJ2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblNombreJ2.setText("NAME");
         jPanel2.add(lblNombreJ2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, 90, 40));
 
         lblNombreJ3.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         lblNombreJ3.setForeground(new java.awt.Color(255, 170, 92));
         lblNombreJ3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblNombreJ3.setText("NAME");
         jPanel2.add(lblNombreJ3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 120, 40));
 
         lblNombreJ4.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         lblNombreJ4.setForeground(new java.awt.Color(255, 170, 92));
         lblNombreJ4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblNombreJ4.setText("NAME");
         jPanel2.add(lblNombreJ4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, 120, 40));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/ficha4Tablero.png"))); // NOI18N
