@@ -769,7 +769,7 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
 
     private void lblHistorialMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHistorialMousePressed
         List<EventoJuego> eventosJuego = tableroActual.getEventosJuego();
-        RegistroEventosDialog historial = new RegistroEventosDialog(this, eventosJuego);
+        RegistroEventos historial = new RegistroEventos(this, eventosJuego);
         historial.setVisible(true);
     }//GEN-LAST:event_lblHistorialMousePressed
 

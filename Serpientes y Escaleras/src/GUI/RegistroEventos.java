@@ -12,11 +12,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
-public class RegistroEventosDialog extends JDialog {
+public class RegistroEventos extends JDialog {
 
     private JTextArea txtRegistroEventos;
 
-    public RegistroEventosDialog(Frame parent, List<EventoJuego> eventosJuego) {
+    public RegistroEventos(Frame parent, List<EventoJuego> eventosJuego) {
         setUndecorated(true);
         setSize(400, 400);
         setLocationRelativeTo(parent);
