@@ -33,7 +33,7 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
     Tablero tablero13x13;
     Tablero tablero15x15;
 
-    public PanelTablero_SerpientesyEscaleras(List<Jugador> jugadores, int tamañoTablero, int numEscaleras, int numSerpientes) {
+    public PanelTablero_SerpientesyEscaleras(List<Jugador> jugadores, List<Integer> posicionesJugadores, int tamañoTablero, int numEscaleras, int numSerpientes) {
         this.jugadores = jugadores;
         this.numEscaleras = numEscaleras;
         this.numSerpientes = numSerpientes;
@@ -48,19 +48,30 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
 
         tamañoTableroActual = tamañoTablero;
 
-        if (jugadores.size() > 0) {
-            lblNombreJ1.setText(jugadores.get(0).getNombre());
-        }
-        if (jugadores.size() > 1) {
-            lblNombreJ2.setText(jugadores.get(1).getNombre());
-        }
-        if (jugadores.size() > 2) {
-            lblNombreJ3.setText(jugadores.get(2).getNombre());
-        }
-        if (jugadores.size() > 3) {
-            lblNombreJ4.setText(jugadores.get(3).getNombre());
-        }
+        asignarNombres(jugadores, posicionesJugadores);
+    }
 
+    private void asignarNombres(List<Jugador> jugadores, List<Integer> posicionesJugadores) {
+        for (int i = 0; i < posicionesJugadores.size(); i++) {
+            int posicion = posicionesJugadores.get(i);
+            Jugador jugador = jugadores.get(i);
+            switch (posicion) {
+                case 1:
+                    lblNombreJ1.setText(jugador.getNombre());
+                    break;
+                case 2:
+                    lblNombreJ2.setText(jugador.getNombre());
+                    break;
+                case 3:
+                    lblNombreJ3.setText(jugador.getNombre());
+                    break;
+                case 4:
+                    lblNombreJ4.setText(jugador.getNombre());
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     private void init(int tamañoTablero, int numEscaleras, int numSerpientes) {

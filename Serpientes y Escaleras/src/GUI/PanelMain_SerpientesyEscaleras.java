@@ -100,7 +100,7 @@ public class PanelMain_SerpientesyEscaleras extends javax.swing.JFrame {
         txtJugador3 = new javax.swing.JTextField();
         txtJugador4 = new javax.swing.JTextField();
         panelBoton = new javax.swing.JPanel();
-        lblInicar = new javax.swing.JLabel();
+        lblIniciar = new javax.swing.JLabel();
         lblTamaño1 = new javax.swing.JLabel();
         lblTamaño2 = new javax.swing.JLabel();
         lblTamaño3 = new javax.swing.JLabel();
@@ -289,21 +289,21 @@ public class PanelMain_SerpientesyEscaleras extends javax.swing.JFrame {
 
         panelBoton.setBackground(new java.awt.Color(90, 114, 179));
 
-        lblInicar.setBackground(new java.awt.Color(255, 255, 255));
-        lblInicar.setFont(new java.awt.Font("Montserrat", 1, 20)); // NOI18N
-        lblInicar.setForeground(new java.awt.Color(0, 0, 0));
-        lblInicar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblInicar.setText("INICIAR");
-        lblInicar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblInicar.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblIniciar.setBackground(new java.awt.Color(255, 255, 255));
+        lblIniciar.setFont(new java.awt.Font("Montserrat", 1, 20)); // NOI18N
+        lblIniciar.setForeground(new java.awt.Color(0, 0, 0));
+        lblIniciar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblIniciar.setText("INICIAR");
+        lblIniciar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblIniciar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lblInicarMouseEntered(evt);
+                lblIniciarMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                lblInicarMouseExited(evt);
+                lblIniciarMouseExited(evt);
             }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                lblInicarMousePressed(evt);
+                lblIniciarMousePressed(evt);
             }
         });
 
@@ -313,13 +313,13 @@ public class PanelMain_SerpientesyEscaleras extends javax.swing.JFrame {
             panelBotonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBotonLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lblInicar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(lblIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         panelBotonLayout.setVerticalGroup(
             panelBotonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBotonLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lblInicar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(lblIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         panelFondo.add(panelBoton);
@@ -387,7 +387,7 @@ public class PanelMain_SerpientesyEscaleras extends javax.swing.JFrame {
         panelFondo.requestFocus();
     }//GEN-LAST:event_panelFondoMousePressed
 
-    private void lblInicarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblInicarMousePressed
+    private void lblIniciarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblIniciarMousePressed
         ImageIcon jugador1Icon = new ImageIcon(getClass().getResource("/resources/ficha1.png"));
         ImageIcon jugador2Icon = new ImageIcon(getClass().getResource("/resources/ficha2.png"));
         ImageIcon jugador3Icon = new ImageIcon(getClass().getResource("/resources/ficha3.png"));
@@ -397,38 +397,6 @@ public class PanelMain_SerpientesyEscaleras extends javax.swing.JFrame {
         Jugador jugador2 = new Jugador(2, txtJugador2.getText(), jugador2Icon);
         Jugador jugador3 = new Jugador(3, txtJugador3.getText(), jugador3Icon);
         Jugador jugador4 = new Jugador(4, txtJugador4.getText(), jugador4Icon);
-
-        if (txtJugador1.getText().equals("")) {
-            if (txtJugador1.hasFocus()) {
-                txtJugador1.setText("");
-            } else {
-                jugador1.setNombre("");
-            }
-        } else {
-            jugador1.setNombre(txtJugador1.getText());
-        }
-
-        if (txtJugador2.getText().equals("")) {
-            if (txtJugador2.hasFocus()) {
-                txtJugador2.setText("");
-            } else {
-                jugador2.setNombre("");
-            }
-        } else {
-            jugador2.setNombre(txtJugador2.getText());
-        }
-
-        if (txtJugador3.getText().equals("")) {
-            jugador3.setNombre("");
-        } else {
-            jugador3.setNombre(txtJugador3.getText());
-        }
-
-        if (txtJugador4.getText().equals("")) {
-            jugador4.setNombre("");
-        } else {
-            jugador4.setNombre(txtJugador4.getText());
-        }
 
         int tamañoTablero = 0;
         int numSerpientes = -1;
@@ -459,34 +427,42 @@ public class PanelMain_SerpientesyEscaleras extends javax.swing.JFrame {
             return;
         }
 
-        if (!txtJugador1.getText().isEmpty() && !txtJugador2.getText().isEmpty() && tamañoTablero != 0) {
-            List<Jugador> jugadores = new ArrayList<>();
+        List<Jugador> jugadores = new ArrayList<>();
+        List<Integer> posicionesJugadores = new ArrayList<>();
+
+        if (!txtJugador1.getText().isEmpty()) {
             jugadores.add(jugador1);
+            posicionesJugadores.add(1);
+        }
+        if (!txtJugador2.getText().isEmpty()) {
             jugadores.add(jugador2);
+            posicionesJugadores.add(2);
+        }
+        if (!txtJugador3.getText().isEmpty()) {
+            jugadores.add(jugador3);
+            posicionesJugadores.add(3);
+        }
+        if (!txtJugador4.getText().isEmpty()) {
+            jugadores.add(jugador4);
+            posicionesJugadores.add(4);
+        }
 
-            if (!txtJugador3.getText().isEmpty()) {
-                jugadores.add(jugador3);
-            }
-
-            if (!txtJugador4.getText().isEmpty()) {
-                jugadores.add(jugador4);
-            }
-
-            PanelTablero_SerpientesyEscaleras panelTablero = new PanelTablero_SerpientesyEscaleras(jugadores, tamañoTablero, numEscaleras, numSerpientes);
+        if (jugadores.size() >= 2) {
+            PanelTablero_SerpientesyEscaleras panelTablero = new PanelTablero_SerpientesyEscaleras(jugadores, posicionesJugadores, tamañoTablero, numEscaleras, numSerpientes);
             panelTablero.setVisible(true);
             this.dispose();
         } else {
-            JOptionPane.showMessageDialog(this, "Faltan campos por llenar.", "Alerta", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Debe ingresar al menos dos jugadores con nombres válidos.", "Error", JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_lblInicarMousePressed
+    }//GEN-LAST:event_lblIniciarMousePressed
 
-    private void lblInicarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblInicarMouseExited
+    private void lblIniciarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblIniciarMouseExited
         panelBoton.setBackground(new Color(90, 114, 179));
-    }//GEN-LAST:event_lblInicarMouseExited
+    }//GEN-LAST:event_lblIniciarMouseExited
 
-    private void lblInicarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblInicarMouseEntered
+    private void lblIniciarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblIniciarMouseEntered
         panelBoton.setBackground(new Color(120, 142, 205));
-    }//GEN-LAST:event_lblInicarMouseEntered
+    }//GEN-LAST:event_lblIniciarMouseEntered
 
     private void txtJugador1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtJugador1KeyTyped
         char caracter = Character.toLowerCase(evt.getKeyChar());
@@ -655,7 +631,7 @@ public class PanelMain_SerpientesyEscaleras extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel lblCierre;
-    private javax.swing.JLabel lblInicar;
+    private javax.swing.JLabel lblIniciar;
     private javax.swing.JLabel lblTamaño;
     private javax.swing.JLabel lblTamaño1;
     private javax.swing.JLabel lblTamaño2;
