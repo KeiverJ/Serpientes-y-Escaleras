@@ -31,13 +31,16 @@ public class RegistroEventosDialog extends JDialog {
         txtRegistroEventos.setLineWrap(true);
         txtRegistroEventos.setWrapStyleWord(true);
 
+        JScrollPane scrollPane = new JScrollPane(txtRegistroEventos);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+
         StringBuilder sb = new StringBuilder();
         for (EventoJuego evento : eventosJuego) {
             sb.append(evento.getDescripcion()).append("\n");
         }
         txtRegistroEventos.setText(sb.toString());
 
-        panel.add(txtRegistroEventos, BorderLayout.CENTER);
+        panel.add(scrollPane, BorderLayout.CENTER);
 
         JButton btnCerrar = new JButton("Cerrar");
         btnCerrar.addActionListener(e -> dispose());
