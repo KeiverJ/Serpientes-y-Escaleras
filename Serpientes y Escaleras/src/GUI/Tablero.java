@@ -63,6 +63,15 @@ public class Tablero extends JPanel {
         repaint();
     }
 
+    public boolean hayGanador() {
+        for (Jugador jugador : jugadores) {
+            if (jugador.getPosition() == rows * cols) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void limpiarImagenesSerpientesYEscaleras(JPanel panelTablero) {
         panelTablero.removeAll();
         panelTablero.revalidate();
@@ -143,7 +152,7 @@ public class Tablero extends JPanel {
                 finUbicacion = random.nextInt(Math.max(1, inicioUbicacion - 1)) + 1;
             } catch (IllegalArgumentException e) {
                 if (intentos >= maxIntentos) {
-                    return -1; 
+                    return -1;
                 }
                 intentos++;
                 continue;

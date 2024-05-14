@@ -619,6 +619,11 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
     }//GEN-LAST:event_lblLanzarDadoMouseExited
 
     private void lblLanzarDadoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLanzarDadoMousePressed
+        if (tableroActual.hayGanador()) {
+            JOptionPane.showMessageDialog(this, "La partida ha finalizado. No pueden haber más intentos.", "Partida finalizada", JOptionPane.INFORMATION_MESSAGE);
+            return; 
+        }
+
         Dado dado = new Dado();
         final int resultado = dado.getValorDado();
 
