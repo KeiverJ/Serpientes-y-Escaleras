@@ -51,15 +51,14 @@ public class PanelMain_SerpientesyEscaleras extends javax.swing.JFrame {
             String input = optionPane.showInputDialog(this, mensaje);
 
             if (input == null) {
-                break;
+                return -1;
             } else if (input.trim().isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Debe ingresar un valor válido.", "Advertencia", JOptionPane.WARNING_MESSAGE);
             } else {
                 try {
                     cantidad = Integer.parseInt(input);
-
                     if (cantidad <= 0) {
-                        JOptionPane.showMessageDialog(this, "La cantidad debe ser un número mayor a 0.", "Error", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(this, "La cantidad debe ser un número entero positivo.", "Error", JOptionPane.ERROR_MESSAGE);
                     } else if (rbt10x10.isSelected() && cantidad > 20) {
                         JOptionPane.showMessageDialog(this, "La cantidad máxima permitida para el tablero 10x10 es 20.", "Error", JOptionPane.ERROR_MESSAGE);
                     } else if (rbt13x13.isSelected() && cantidad > 35) {
@@ -432,23 +431,32 @@ public class PanelMain_SerpientesyEscaleras extends javax.swing.JFrame {
         }
 
         int tamañoTablero = 0;
-        int numSerpientes = 0;
-        int numEscaleras = 0;
+        int numSerpientes = -1;
+        int numEscaleras = -1;
 
         final JOptionPane optionPane = new JOptionPane();
 
         if (rbt10x10.isSelected()) {
-            numSerpientes = pedirCantidad(optionPane, "Ingrese la cantidad de serpientes para el tablero 10x10:");
-            numEscaleras = pedirCantidad(optionPane, "Ingrese la cantidad de escaleras para el tablero 10x10:");
             tamañoTablero = 10;
         } else if (rbt13x13.isSelected()) {
-            numSerpientes = pedirCantidad(optionPane, "Ingrese la cantidad de serpientes para el tablero 13x13:");
-            numEscaleras = pedirCantidad(optionPane, "Ingrese la cantidad de escaleras para el tablero 13x13:");
             tamañoTablero = 13;
         } else if (rbt15x15.isSelected()) {
-            numSerpientes = pedirCantidad(optionPane, "Ingrese la cantidad de serpientes para el tablero 15x15:");
-            numEscaleras = pedirCantidad(optionPane, "Ingrese la cantidad de escaleras para el tablero 15x15:");
             tamañoTablero = 15;
+        }
+
+        if (tamañoTablero > 0) {
+            numSerpientes = pedirCantidad(optionPane, "Ingrese la cantidad de serpientes para el tablero " + tamañoTablero + "x" + tamañoTablero + ":");
+            if (numSerpientes < 0) {
+                return;
+            }
+
+            numEscaleras = pedirCantidad(optionPane, "Ingrese la cantidad de escaleras para el tablero " + tamañoTablero + "x" + tamañoTablero + ":");
+            if (numEscaleras < 0) {
+                return;
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un tablero antes de ingresar la cantidad de serpientes y escaleras.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
         }
 
         if (!txtJugador1.getText().isEmpty() && !txtJugador2.getText().isEmpty() && tamañoTablero != 0) {
