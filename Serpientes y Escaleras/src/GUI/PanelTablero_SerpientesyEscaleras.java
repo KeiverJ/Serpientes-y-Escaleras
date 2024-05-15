@@ -835,27 +835,6 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
         } while (continuar);
     }//GEN-LAST:event_lblReiniciarMousePressed
 
-    public void moverJugadorActual(int resultado) {
-        Jugador jugadorActual = jugadores.get(this.jugadorActual);
-
-        switch (tamañoTableroActual) {
-            case 10:
-                tablero10x10.moverJugador(jugadorActual, resultado);
-                this.jugadorActual = (this.jugadorActual + 1) % jugadores.size();
-                break;
-            case 13:
-                tablero13x13.moverJugador(jugadorActual, resultado);
-                this.jugadorActual = (this.jugadorActual + 1) % jugadores.size();
-                break;
-            case 15:
-                tablero15x15.moverJugador(jugadorActual, resultado);
-                this.jugadorActual = (this.jugadorActual + 1) % jugadores.size();
-                break;
-            default:
-                break;
-        }
-    }
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup btngTamaño;
