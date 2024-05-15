@@ -26,6 +26,7 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
     private int jugadorActualIndex = 0;
     private Tablero tableroActual;
     private int tableroAnterior = 0;
+    public boolean dadoLanzado = false;
 
     int tamañoTableroActual;
 
@@ -683,18 +684,26 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
     }//GEN-LAST:event_lblLanzarDadoMouseExited
 
     private void lblLanzarDadoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLanzarDadoMousePressed
+        if (dadoLanzado) {
+            JOptionPane.showMessageDialog(this, "Espere a que el jugador actual termine su movimiento.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
         if (tableroActual.hayGanador()) {
             JOptionPane.showMessageDialog(this, "La partida ha finalizado. No pueden haber más intentos.", "Partida finalizada", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
 
-        Dado dado = new Dado();
-        final int resultado = dado.getValorDado();
+        dadoLanzado = true;
+        lblLanzarDado.setEnabled(false);
 
-        final Timer timer = new Timer(50, null);
+        Dado dado = new Dado();
+        int resultado = dado.getValorDado();
+
+        Timer timer = new Timer(50, null);
         timer.start();
 
-        final long tiempoInicio = System.currentTimeMillis();
+        long tiempoInicio = System.currentTimeMillis();
         timer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -868,7 +877,7 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
     private javax.swing.JLabel lblCierre;
     private javax.swing.JLabel lblDado;
     private javax.swing.JLabel lblHistorial;
-    private javax.swing.JLabel lblLanzarDado;
+    public javax.swing.JLabel lblLanzarDado;
     private javax.swing.JLabel lblNombreJ1;
     private javax.swing.JLabel lblNombreJ2;
     private javax.swing.JLabel lblNombreJ3;

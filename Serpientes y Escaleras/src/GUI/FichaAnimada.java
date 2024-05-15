@@ -16,6 +16,7 @@ public class FichaAnimada extends Thread {
     private int movimiento;
     private Tablero tablero;
     private int delay;
+    private OnFinishListener onFinishListener;
 
     public FichaAnimada(Jugador jugador, int movimiento, Tablero tablero, int delay) {
         this.jugador = jugador;
@@ -71,5 +72,18 @@ public class FichaAnimada extends Thread {
         }
 
         tablero.repaint();
+
+        if (onFinishListener != null) {
+            onFinishListener.onFinish();
+        }
+    }
+
+    public void setOnFinishListener(OnFinishListener onFinishListener) {
+        this.onFinishListener = onFinishListener;
+    }
+
+    public interface OnFinishListener {
+
+        void onFinish();
     }
 }

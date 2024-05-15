@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -432,8 +433,17 @@ public class Tablero extends JPanel {
     }
 
     public void moverJugador(Jugador jugador, int movimiento) {
-        FichaAnimada animacion = new FichaAnimada(jugador, movimiento, this, 300);
+        FichaAnimada animacion = new FichaAnimada(jugador, movimiento, this, 100);
         animacion.start();
+
+        animacion.setOnFinishListener(new FichaAnimada.OnFinishListener() {
+            @Override
+            public void onFinish() {
+                PanelTablero_SerpientesyEscaleras panelTablero = (PanelTablero_SerpientesyEscaleras) SwingUtilities.getWindowAncestor(Tablero.this);
+                panelTablero.dadoLanzado = false;
+                panelTablero.lblLanzarDado.setEnabled(true);
+            }
+        });
     }
 
     public boolean isSerpienteInicio(int pos) {
