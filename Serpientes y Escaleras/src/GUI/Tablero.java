@@ -433,22 +433,28 @@ public class Tablero extends JPanel {
     }
 
     public void moverJugador(Jugador jugador, int movimiento) {
-        FichaAnimada animacion = new FichaAnimada(jugador, movimiento, this, 300);
-        animacion.start();
+        int nuevaPosicion = jugador.getPosition() + movimiento;
+        if (nuevaPosicion == rows * cols) {
+            PanelTablero_SerpientesyEscaleras panelTablero = (PanelTablero_SerpientesyEscaleras) SwingUtilities.getWindowAncestor(this);
+            panelTablero.jugadorGanadorIndex = jugadores.indexOf(jugador);
+        } else {
+            FichaAnimada animacion = new FichaAnimada(jugador, movimiento, this, 300);
+            animacion.start();
 
-        int jugadorActualIndex = jugadores.indexOf(jugador);
-        int siguienteJugadorIndex = (jugadorActualIndex + 1) % jugadores.size();
+            int jugadorActualIndex = jugadores.indexOf(jugador);
+            int siguienteJugadorIndex = (jugadorActualIndex + 1) % jugadores.size();
 
-        animacion.setOnFinishListener(new FichaAnimada.OnFinishListener() {
-            @Override
-            public void onFinish() {
-                PanelTablero_SerpientesyEscaleras panelTablero = (PanelTablero_SerpientesyEscaleras) SwingUtilities.getWindowAncestor(Tablero.this);
-                panelTablero.bordeTurnoJugador(siguienteJugadorIndex);
-                panelTablero.jugadorActualIndex = siguienteJugadorIndex;
-                panelTablero.dadoLanzado = false;
-                panelTablero.lblLanzarDado.setEnabled(true);
-            }
-        });
+            animacion.setOnFinishListener(new FichaAnimada.OnFinishListener() {
+                @Override
+                public void onFinish() {
+                    PanelTablero_SerpientesyEscaleras panelTablero = (PanelTablero_SerpientesyEscaleras) SwingUtilities.getWindowAncestor(Tablero.this);
+                    panelTablero.bordeTurnoJugador(siguienteJugadorIndex);
+                    panelTablero.jugadorActualIndex = siguienteJugadorIndex;
+                    panelTablero.dadoLanzado = false;
+                    panelTablero.lblLanzarDado.setEnabled(true);
+                }
+            });
+        }
     }
 
     public boolean isSerpienteInicio(int pos) {

@@ -29,6 +29,7 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
     private Tablero tableroActual;
     private int tableroAnterior = 0;
     public boolean dadoLanzado = false;
+    public int jugadorGanadorIndex = -1;
 
     int tamañoTableroActual;
 
@@ -201,18 +202,18 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
                 init(10, numEscaleras, numSerpientes);
                 tablero10x10.reiniciarPosicionJugadores();
                 jugadorActualIndex = 0;
-                bordeTurnoJugador(jugadorActualIndex); 
+                bordeTurnoJugador(jugadorActualIndex);
                 break;
             case 13:
                 init(13, numEscaleras, numEscaleras);
                 tablero13x13.reiniciarPosicionJugadores();
                 jugadorActualIndex = 0;
-                bordeTurnoJugador(jugadorActualIndex); 
+                bordeTurnoJugador(jugadorActualIndex);
                 break;
             case 15:
                 init(15, numEscaleras, numSerpientes);
                 tablero15x15.reiniciarPosicionJugadores();
-                jugadorActualIndex = 0; 
+                jugadorActualIndex = 0;
                 bordeTurnoJugador(jugadorActualIndex);
                 break;
         }
@@ -861,6 +862,14 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
 
                                 init(tamañoTableroActual, numEscaleras, numSerpientes);
                                 tableroActual.reiniciarPosicionJugadores();
+
+                                if (jugadorGanadorIndex != -1) {
+                                    jugadorActualIndex = jugadorGanadorIndex;
+                                } else {
+                                    jugadorActualIndex = 0;
+                                }
+
+                                bordeTurnoJugador(jugadorActualIndex);
                             }
                         } catch (NumberFormatException e) {
                             JOptionPane.showMessageDialog(this, "Entrada inválida para escaleras. Por favor, ingrese un número entero.", "Error", JOptionPane.ERROR_MESSAGE);
