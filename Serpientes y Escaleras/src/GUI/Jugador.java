@@ -13,14 +13,22 @@ import javax.swing.ImageIcon;
 public class Jugador {
 
     private String nombre;
-    private ImageIcon fichaIcon;
+    private ImageIcon fichaTableroIcon;
     private int id;
     private int position;
-    
-    public Jugador(int id, String nombre, ImageIcon fichaIcon) {
+
+    public Jugador(int id, String nombre, ImageIcon fichaTableroIcon) {
         this.nombre = nombre;
-        this.fichaIcon = fichaIcon;
+        this.fichaTableroIcon = fichaTableroIcon;
         this.position = 1;
+    }
+
+    public void setFichaTableroIcon(ImageIcon fichaTableroIcon) {
+        this.fichaTableroIcon = fichaTableroIcon;
+    }
+
+
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -28,8 +36,8 @@ public class Jugador {
         return nombre;
     }
 
-    public ImageIcon getFichaIcon() {
-        return fichaIcon;
+    public ImageIcon getFichaTableroIcon() {
+        return fichaTableroIcon;
     }
 
     public int getId() {
@@ -44,9 +52,7 @@ public class Jugador {
         this.position = position;
     }
 
-
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
 }

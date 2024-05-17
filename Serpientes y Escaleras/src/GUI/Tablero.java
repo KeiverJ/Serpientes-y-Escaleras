@@ -26,7 +26,7 @@ public class Tablero extends JPanel {
     ImageIcon escaleraInicioIcon = new ImageIcon(getClass().getResource("/resources/escalerainicio.png"));
     ImageIcon escaleraFinIcon = new ImageIcon(getClass().getResource("/resources/escalerafin.png"));
 
-    private static final int CELL_SIZE = 55;
+    private static final int CELL_SIZE = 65;
     public final int rows;
     public final int cols;
     private int[] serpientesInicio;
@@ -233,7 +233,7 @@ public class Tablero extends JPanel {
             int x = (int) (col * CELL_SIZE_X + CELL_SIZE_X / 4);
             int y = (int) ((rows - row - 1) * CELL_SIZE_Y + CELL_SIZE_Y / 4);
 
-            ImageIcon jugadorIcon = jugador.getFichaIcon();
+            ImageIcon jugadorIcon = jugador.getFichaTableroIcon();
             Image img = jugadorIcon.getImage();
 
             g.drawImage(img, x, y, CELL_SIZE / 2, CELL_SIZE / 2, this);

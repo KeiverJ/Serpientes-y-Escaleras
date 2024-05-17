@@ -388,15 +388,16 @@ public class PanelMain_SerpientesyEscaleras extends javax.swing.JFrame {
     }//GEN-LAST:event_panelFondoMousePressed
 
     private void lblIniciarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblIniciarMousePressed
-        ImageIcon jugador1Icon = new ImageIcon(getClass().getResource("/resources/ficha1.png"));
-        ImageIcon jugador2Icon = new ImageIcon(getClass().getResource("/resources/ficha2.png"));
-        ImageIcon jugador3Icon = new ImageIcon(getClass().getResource("/resources/ficha3.png"));
-        ImageIcon jugador4Icon = new ImageIcon(getClass().getResource("/resources/ficha4.png"));
 
-        Jugador jugador1 = new Jugador(1, txtJugador1.getText(), jugador1Icon);
-        Jugador jugador2 = new Jugador(2, txtJugador2.getText(), jugador2Icon);
-        Jugador jugador3 = new Jugador(3, txtJugador3.getText(), jugador3Icon);
-        Jugador jugador4 = new Jugador(4, txtJugador4.getText(), jugador4Icon);
+        ImageIcon ficha1 = new ImageIcon(getClass().getResource("/resources/ficha1Tablero.png"));
+        ImageIcon ficha2 = new ImageIcon(getClass().getResource("/resources/ficha2Tablero.png"));
+        ImageIcon ficha3 = new ImageIcon(getClass().getResource("/resources/ficha3Tablero.png"));
+        ImageIcon ficha4 = new ImageIcon(getClass().getResource("/resources/ficha4Tablero.png"));
+
+        Jugador jugador1 = new Jugador(1, txtJugador1.getText(), ficha1);
+        Jugador jugador2 = new Jugador(2, txtJugador2.getText(), ficha2);
+        Jugador jugador3 = new Jugador(3, txtJugador3.getText(), ficha3);
+        Jugador jugador4 = new Jugador(4, txtJugador4.getText(), ficha4);
 
         int tamañoTablero = 0;
         int numSerpientes = -1;

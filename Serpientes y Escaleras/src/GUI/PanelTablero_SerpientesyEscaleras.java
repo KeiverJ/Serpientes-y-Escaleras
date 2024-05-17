@@ -52,32 +52,40 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
 
         tamañoTableroActual = tamañoTablero;
 
-        asignarNombres(jugadores, posicionesJugadores);
+        asignarNombres(jugadores);
         bordeTurnoJugador(0);
+
+
     }
 
-    private void asignarNombres(List<Jugador> jugadores, List<Integer> posicionesJugadores) {
-        for (int i = 0; i < posicionesJugadores.size(); i++) {
-            int posicion = posicionesJugadores.get(i);
+    private void asignarNombres(List<Jugador> jugadores) {
+        for (int i = 0; i < jugadores.size(); i++) {
             Jugador jugador = jugadores.get(i);
-            switch (posicion) {
-                case 1:
+            ImageIcon fichaTablero = jugador.getFichaTableroIcon();
+
+            switch (i) {
+                case 0:
                     lblNombreJ1.setText(jugador.getNombre());
+                    Ficha1.setIcon(fichaTablero);
+                    break;
+                case 1:
+                    lblNombreJ2.setText(jugador.getNombre());
+                    Ficha2.setIcon(fichaTablero);
                     break;
                 case 2:
-                    lblNombreJ2.setText(jugador.getNombre());
+                    lblNombreJ3.setText(jugador.getNombre());
+                    Ficha3.setIcon(fichaTablero);
                     break;
                 case 3:
-                    lblNombreJ3.setText(jugador.getNombre());
-                    break;
-                case 4:
                     lblNombreJ4.setText(jugador.getNombre());
+                    Ficha4.setIcon(fichaTablero);
                     break;
                 default:
                     break;
             }
         }
     }
+
 
     private void init(int tamañoTablero, int numEscaleras, int numSerpientes) {
         limpiarTableroAnterior(tamañoTablero);
@@ -225,6 +233,8 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
         lblNombreJ3.setBorder(null);
         lblNombreJ4.setBorder(null);
 
+        Jugador jugadorActual = jugadores.get(jugadorActualIndex);
+
         switch (jugadorActualIndex) {
             case 0:
                 lblNombreJ1.setBorder(BorderFactory.createLineBorder(new Color(220, 20, 60), 2));
@@ -253,10 +263,10 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
         lblNombreJ2 = new javax.swing.JLabel();
         lblNombreJ3 = new javax.swing.JLabel();
         lblNombreJ4 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        Ficha4 = new javax.swing.JLabel();
+        Ficha1 = new javax.swing.JLabel();
+        Ficha2 = new javax.swing.JLabel();
+        Ficha3 = new javax.swing.JLabel();
         panelBoton1 = new javax.swing.JPanel();
         lblTerminarPartida = new javax.swing.JLabel();
         panelBoton = new javax.swing.JPanel();
@@ -312,40 +322,29 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
         lblNombreJ1.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         lblNombreJ1.setForeground(new java.awt.Color(220, 20, 60));
         lblNombreJ1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblNombreJ1.setText("NAME");
         jPanel2.add(lblNombreJ1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 100, 40));
 
         lblNombreJ2.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         lblNombreJ2.setForeground(new java.awt.Color(65, 105, 225));
         lblNombreJ2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblNombreJ2.setText("NAME");
         jPanel2.add(lblNombreJ2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, 90, 40));
 
         lblNombreJ3.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         lblNombreJ3.setForeground(new java.awt.Color(80, 200, 120));
         lblNombreJ3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblNombreJ3.setText("NAME");
         jPanel2.add(lblNombreJ3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 120, 40));
 
         lblNombreJ4.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         lblNombreJ4.setForeground(new java.awt.Color(204, 153, 255));
         lblNombreJ4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblNombreJ4.setText("NAME");
         lblNombreJ4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jPanel2.add(lblNombreJ4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 220, 120, 40));
+        jPanel2.add(Ficha4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 150, 60, 70));
+        jPanel2.add(Ficha1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 60, 70));
+        jPanel2.add(Ficha2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 60, 70));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/ficha4Tablero.png"))); // NOI18N
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 150, 60, 70));
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/ficha1Tablero.png"))); // NOI18N
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 60, 70));
-
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/ficha2Tablero.png"))); // NOI18N
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 60, 70));
-
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/ficha3Tablero.png"))); // NOI18N
-        jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 60, 70));
+        Ficha3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel2.add(Ficha3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 60, 70));
 
         panelBoton1.setBackground(new java.awt.Color(216, 195, 165));
 
@@ -886,11 +885,11 @@ public class PanelTablero_SerpientesyEscaleras extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Ficha1;
+    private javax.swing.JLabel Ficha2;
+    private javax.swing.JLabel Ficha3;
+    private javax.swing.JLabel Ficha4;
     private javax.swing.ButtonGroup btngTamaño;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel10x10;
     private javax.swing.JPanel jPanel13x13;
     private javax.swing.JPanel jPanel15x15;
