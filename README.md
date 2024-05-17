@@ -41,7 +41,7 @@
 <h2>Gestión de turnos:</h2>
 
 <div align="center">
-    <img src="https://github.com/KeiverJ/Serpientes-y-Escaleras/assets/160792532/a124f23f-efb0-4d90-aff6-5e388b0093d2" width="45%" />
+    <img src="https://github.com/KeiverJ/Serpientes-y-Escaleras/assets/160792532/08a73f01-75fe-4190-a7c4-1850b1f4caf4" width="45%" />
 </div>
 
 <h2>Ubicación de serpientes y escaleras:</h2>
