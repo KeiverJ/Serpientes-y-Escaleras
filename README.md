@@ -53,6 +53,5 @@
 <h2>Eventos:</h2>
 
 <div align="center">
-    <img src="https://github.com/KeiverJ/Serpientes-y-Escaleras/assets/160792532/6d7e3193-1cf6-440f-9032-030fd137dabe" width="45%" />
+    <img src="https://github.com/KeiverJ/Serpientes-y-Escaleras/assets/160792532/88c31f98-7e08-42a3-bf21-28a275a4891f" width="45%" />
 </div>
-
