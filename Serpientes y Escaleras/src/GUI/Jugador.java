@@ -27,7 +27,6 @@ public class Jugador {
         this.fichaTableroIcon = fichaTableroIcon;
     }
 
-
     public void setId(int id) {
         this.id = id;
     }
